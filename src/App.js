@@ -1,13 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
-import Header from './components/Header';
 import Routes from './Routes';
-
+import { useRoutes } from 'react-router';
+import routes from './Routes';
 
 const App = () => {
-  return (
+  const routing = useRoutes(
+    routes
+  )
+
+  return(
     <div>
-      <Routes/>
+      {routing}
     </div>
   )
 }

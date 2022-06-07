@@ -1,13 +1,12 @@
 import React from 'react'
-import { useRoutes } from 'react-router';
 import { Home, Issue, Projects, Responsibility, NoMatch } from './pages';
 
-const Routes = () => {
-    const element = useRoutes([
+    const routes = [
         {
             path: '/',
             element: <Home />,
             children: [
+                // { index: true, element: <Projects /> },
                 {
                     path: '/projects',
                     element: <Projects />
@@ -20,14 +19,10 @@ const Routes = () => {
                     path: '/issues',
                     element: <Issue />,
                 },
-                {
-                    path: '*',
-                    element: <NoMatch />,
-                },
+            
             ],
-        },
-    ])
-    return element;
-}
 
-export default Routes;
+        },
+    ]
+
+export default routes;

@@ -1,15 +1,15 @@
 import React from 'react'
 import { ContentHeader, SidebarBtn, Logo, NavBar, Item, Account, LeftSide } from '../style-components/Header';
-import { Link, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 
     return (
         <ContentHeader>
-
+            
             <LeftSide>
                 <SidebarBtn>
-                    
+
                 </SidebarBtn>
                 <Logo />
             </LeftSide>
@@ -24,9 +24,7 @@ const Header = () => {
                 <Item>
                     <Link to={'/issues'}>Issues</Link>
                 </Item>
-                <Outlet />
             </NavBar>
-
             <Account />
 
         </ContentHeader>
