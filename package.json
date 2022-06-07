@@ -1,0 +1,43 @@
+{
+  "name": "project-management-system",
+  "version": "1.0.0",
+  "description": "mgn-system",
+  "main": "index.js",
+  "scripts": {
+    "serve": "webpack serve --mode development",
+    "build": "webpack --mode production"
+  },
+  "author": "Halil Nergiz",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router": "^6.3.0",
+    "react-router-dom": "^6.3.0",
+    "styled-components": "^5.3.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  },
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/halilnergiz/Project-Management-System.git"
+  },
+  "bugs": {
+    "url": "https://github.com/halilnergiz/Project-Management-System/issues"
+  },
+  "homepage": "https://github.com/halilnergiz/Project-Management-System#readme"
+}
