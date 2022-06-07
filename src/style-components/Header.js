@@ -25,6 +25,7 @@ export const SidebarBtn = styled.button`
     height: 2.5rem;
     border: 1px solid black ;
     background: transparent;
+
 `
 export const Logo = styled.div`
     width: 4rem;

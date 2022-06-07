@@ -8,14 +8,13 @@ const Header = () => {
         <ContentHeader>
 
             <LeftSide>
-                <SidebarBtn />
+                <SidebarBtn>
+                    
+                </SidebarBtn>
                 <Logo />
             </LeftSide>
 
             <NavBar>
-                {/* <Item>
-                    <Link to={'/'} >Home</Link>
-                </Item> */}
                 <Item>
                     <Link to={'/projects'}>Projects</Link>
                 </Item>
