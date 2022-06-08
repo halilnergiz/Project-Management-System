@@ -1,28 +1,21 @@
 import React from 'react'
-import { ContentHeader, SidebarBtn, Logo, NavBar, Item, Account, LeftSide } from '../style-components/Header';
+import { ContentHeader,NavBar, Item, Account, linkStyle } from '../style-components/Header';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
 
     return (
         <ContentHeader>
-            
-            <LeftSide>
-                <SidebarBtn>
-
-                </SidebarBtn>
-                <Logo />
-            </LeftSide>
 
             <NavBar>
                 <Item>
-                    <Link to={'/projects'}>Projects</Link>
+                    <Link to={'/projects'} style={linkStyle}>Projects</Link>
                 </Item>
                 <Item>
-                    <Link to={'/responsibility'}>Responsiblity</Link>
+                    <Link to={'/responsibility'} style={linkStyle}>Responsiblity</Link>
                 </Item>
                 <Item>
-                    <Link to={'/issues'}>Issues</Link>
+                    <Link to={'/issues'} style={linkStyle}>Issues</Link>
                 </Item>
             </NavBar>
             <Account />

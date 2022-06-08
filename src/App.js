@@ -1,17 +1,15 @@
 import React from 'react';
-import Routes from './Routes';
 import { useRoutes } from 'react-router';
 import routes from './Routes';
+import { AppWrapper } from './style-components/Wrapper';
 
 const App = () => {
-  const routing = useRoutes(
-    routes
-  )
+  const routing = useRoutes(routes);
 
-  return(
-    <div>
+  return (
+    <AppWrapper>
       {routing}
-    </div>
+    </AppWrapper>
   )
 }
 

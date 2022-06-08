@@ -1,10 +1,14 @@
 import React from 'react'
+import {SidebarBtn, LeftSide } from '../style-components/Sidebar';
 
 const SideBar = () => {
   return (
-    <div>
-      
-    </div>
+      <LeftSide>
+        <SidebarBtn>
+          <i className="fa-solid fa-bars fa-xl"></i>
+        </SidebarBtn>
+        {/* <Logo /> */}
+      </LeftSide>
   )
 }
 

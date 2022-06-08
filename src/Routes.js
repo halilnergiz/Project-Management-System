@@ -1,12 +1,12 @@
 import React from 'react'
-import { Home, Issue, Projects, Responsibility, NoMatch } from './pages';
+import { Layout, Issue, Projects, Responsibility, NoMatch, Home } from './pages';
 
     const routes = [
         {
             path: '/',
-            element: <Home />,
+            element: <Layout />,
             children: [
-                // { index: true, element: <Projects /> },
+                { index: true, element: <Home /> },
                 {
                     path: '/projects',
                     element: <Projects />
@@ -21,7 +21,11 @@ import { Home, Issue, Projects, Responsibility, NoMatch } from './pages';
                 },
             
             ],
+        },
 
+        {
+            path: '*',
+            element: <NoMatch />,
         },
     ]
 
