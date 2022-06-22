@@ -1,0 +1,65 @@
+[
+    {
+        "title": "Projects",
+        "icon": "bi-gear-fill",
+        "childrens": [
+            {
+                "title": "XferData",
+                "icon": "bi-phone-fill",
+
+                "childrens": [
+                    {
+                        "title": "XferDataRepo",
+                        "icon": "bi-facebook",
+                        "childrens": [
+                            {
+                                "title": "Payment",
+                                "icon": "bi-facebook"
+                            },
+        
+                            {
+                                "title": "Data Service",
+                                "icon": "bi-instagram"
+                            },
+                            {
+                                "title": "Logger Service",
+                                "icon": "bi-instagram"
+                            }
+                        ]
+                    }
+
+                ]
+            },
+            {
+                "title": "MultiRepo Project",
+                "icon": "bi-gear-fill",
+        
+                "childrens": [
+                  {
+                    "title":"microservice-1"
+                  },
+                  {
+                    "title": "microservice-2"
+                  },
+                  {
+                    "title": "microservice-3"
+                  },
+                  {
+                    "title":"Front-End"
+                  }
+                ]
+        
+              }
+        ]
+    },
+    {
+        "title": "Support",
+        "icon": "bi-question-circle-fill",
+        "path": "/support"
+    },
+    {
+        "title": "Report Bug",
+        "icon": "bi-bug",
+        "path": "/report-bug"
+    }
+]

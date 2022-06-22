@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from './components/Header'
-import SideBar from './components/SideBar'
+import SideBar from './components/SideBar/SideBar'
 import { LayoutWrapper, OutletWrapper, MainLayout } from './style-components/Wrapper'
 
 const Layout = () => {
