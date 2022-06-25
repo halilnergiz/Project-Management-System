@@ -9,8 +9,7 @@ const ContentHeader = styled.div`
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid gray;
-    border-radius: 0px 0px 0px 0px;
-    background-color: rgba(22,22,22,1);
+    background-color: ${(props) => props.theme.bgColor};
 `
 
 const NavBar = styled.ul`
@@ -24,10 +23,10 @@ const Item = styled.li`
     margin: 0 10px;
 `
 
-const linkStyle = {
-    color:"white",
-    textDecoration: "none"
-}
+const NavLink = styled(Link)`
+    color: ${(props) => props.theme.textColor};
+    text-decoration: none;
+`
 
 const Account = styled.div`
     position: relative;
@@ -45,17 +44,17 @@ const Header = () => {
 
             <NavBar>
                 <Item>
-                    <Link to={'/projects'} style={linkStyle}>Projects</Link>
+                    <NavLink to={'/projects'}>Projects</NavLink>
                 </Item>
                 <Item>
-                    <Link to={'/responsibility'} style={linkStyle}>Responsiblity</Link>
+                    <NavLink to={'/responsibility'}>Responsiblity</NavLink>
                 </Item>
                 <Item>
-                    <Link to={'/issues'} style={linkStyle}>Issues</Link>
+                    <NavLink to={'/issues'}>Issues</NavLink>
                 </Item>
             </NavBar>
             <Account />
-
+    
         </ContentHeader>
     )
 }

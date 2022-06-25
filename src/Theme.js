@@ -1,12 +1,13 @@
-export const theme = {
-  bgColor:{
-      header: '#161616',
-      sideBar: '#161616'
-  },
-  color: {
-      headerTxt:'black' ,
-      sideBarTxt: 'white'
-  }
+export const darkTheme = {
+  bgColor: '#161616',
+  textColor: 'white'
 }
 
+export const lightTheme = {
+  bgColor: 'white',
+  textColor: 'black'
+}
 
+export const header = {
+
+}

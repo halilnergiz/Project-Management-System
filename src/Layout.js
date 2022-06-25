@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from './components/Header'
 import SideBar from './components/SideBar/SideBar'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
+// eslint-disable-next-line no-unused-vars
+import { lightTheme, darkTheme } from './Theme'
+
 
 const LayoutWrapper = styled.div`
-    height: 100%;
+    height: 100%; 
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: row;
 `
+
 const MainLayout = styled.div`
     height: 100%;
     width: 97%;
@@ -25,22 +29,35 @@ const OutletWrapper = styled.div`
     margin-right: 1rem;
 `
 
+// const ChangeTheme = styled.button`
+    
+// `
+
 const Layout = () => {
+  const [theme, setTheme] = useState(darkTheme)
+
   return (
-    <LayoutWrapper>
-      <SideBar />
+    <ThemeProvider theme={theme}>
+      <LayoutWrapper>
+        <SideBar />
 
-      <MainLayout>
+        <MainLayout>
 
-        <Header />
+          <Header />
 
-        <OutletWrapper>
-          <Outlet />
-        </OutletWrapper>
+          {/* Change Theme Code */}
+          {/* <ChangeTheme onClick={() => setTheme(theme == lightTheme ? darkTheme : lightTheme)}>
+            theme
+          </ChangeTheme> */}
 
-      </MainLayout>
+          <OutletWrapper>
+            <Outlet />
+          </OutletWrapper>
 
-    </LayoutWrapper>
+        </MainLayout>
+
+      </LayoutWrapper>
+    </ThemeProvider>
   )
 }
 

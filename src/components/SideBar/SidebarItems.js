@@ -2,31 +2,10 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const SidebarTitle = styled.div`
-    display: flex;
-    justify-content: space-between;
-    font-size: 1em;
-    user-select: none;
-    cursor: pointer;
-    
-    span i{
-    display: inline-block;
-    width: 1.5em;
-    margin-left: 2rem;
-    }
-
-  .toggle-btn{
-    cursor: pointer;
-    transition: transform .3s;
-  }
-
-`
-
 const SidebarItem = styled.div`
 .sidebar{
     width:min-content;
     flex-shrink: 0;
-    background-color: rgba(22, 22, 22, 1);
     height: 100vh;
     overflow: auto;
   }
@@ -50,7 +29,20 @@ const SidebarItem = styled.div`
     font-size: 1em;
     user-select: none;
     cursor: pointer;
+    color: ${(props) => props.theme.textColor};
   }
+
+  span i{
+    display: inline-block;
+    width: 1.5em;
+    margin-left: 2rem;
+    }
+
+  .toggle-btn{
+    cursor: pointer;
+    transition: transform .3s;
+  }
+
   .sidebar-title span i{
     display: inline-block;
     width: 1.5em;
@@ -74,7 +66,7 @@ const SidebarItem = styled.div`
   
   .sidebar-item.plain{
     font-size: 1em;
-    color: #fff;
+    color: ${(props) => props.theme.textColor};
     text-decoration: none;
   }
   .sidebar-item.plain:hover{
@@ -86,6 +78,7 @@ const SidebarItem = styled.div`
   }
 `
 
+/* eslint-disable react/prop-types */
 const SidebarItems = ({ item }) => {
     const [open, setOpen] = useState(false)
 
@@ -93,12 +86,12 @@ const SidebarItems = ({ item }) => {
         return (
             <SidebarItem>
                 <div className={open ? "sidebar-item open" : "sidebar-item"}>
-                    <SidebarTitle onClick={() => setOpen(!open)}>
+                    <div className='sidebar-title' onClick={() => setOpen(!open)}>
                         <span>
                             {item.title}
                         </span>
-                        < i className="fa-solid fa-chevron-down toggle-btn" style={{ marginLeft: '4px' }} ></i>
-                    </SidebarTitle>
+                        <i className="fa-solid fa-chevron-down toggle-btn" style={{ marginLeft: '4px' }}></i>
+                    </div>
                     <div className="sidebar-content">
                         {item.childrens.map((child, index) => <SidebarItems key={index} item={child} />)}
                     </div>
