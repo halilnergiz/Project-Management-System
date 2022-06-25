@@ -1,65 +1,47 @@
 [
     {
         "title": "Projects",
-        "icon": "bi-gear-fill",
+        "path": "/projects",
         "childrens": [
             {
                 "title": "XferData",
-                "icon": "bi-phone-fill",
-
                 "childrens": [
                     {
                         "title": "XferDataRepo",
-                        "icon": "bi-facebook",
                         "childrens": [
                             {
-                                "title": "Payment",
-                                "icon": "bi-facebook"
-                            },
-        
-                            {
-                                "title": "Data Service",
-                                "icon": "bi-instagram"
+                                "title": "Payment"
                             },
                             {
-                                "title": "Logger Service",
-                                "icon": "bi-instagram"
+                                "title": "Data Service"
+                            },
+                            {
+                                "title": "Logger Service"
                             }
                         ]
                     }
-
                 ]
             },
             {
                 "title": "MultiRepo Project",
-                "icon": "bi-gear-fill",
-        
                 "childrens": [
-                  {
-                    "title":"microservice-1"
-                  },
-                  {
-                    "title": "microservice-2"
-                  },
-                  {
-                    "title": "microservice-3"
-                  },
-                  {
-                    "title":"Front-End"
-                  }
+                    {
+                        "title": "microservice-1",
+                        "path": "/mc-1"
+                    },
+                    {
+                        "title": "microservice-2",
+                        "path": "/mc-2"
+                    },
+                    {
+                        "title": "microservice-3",
+                        "path": "/mc-3"
+                    },
+                    {
+                        "title": "Front-End"
+                    }
                 ]
-        
-              }
+            }
         ]
-    },
-    {
-        "title": "Support",
-        "icon": "bi-question-circle-fill",
-        "path": "/support"
-    },
-    {
-        "title": "Report Bug",
-        "icon": "bi-bug",
-        "path": "/report-bug"
     }
 ]
