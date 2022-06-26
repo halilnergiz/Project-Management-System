@@ -16,24 +16,24 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
   padding: 0;
  }
-`
+`;
 
 const AppWrapper = styled.div`
-    height: 100%;
-    margin: 0;
-    padding: 0;
-`
+  height: 100%;
+  margin: 0;
+  padding: 0;
+`;
 
 const App = () => {
   const routing = useRoutes(routes);
   return (
     <>
-    <AppWrapper>
-      <GlobalStyle />
-      {routing}
-    </AppWrapper>
+      <AppWrapper>
+        <GlobalStyle />
+        {routing}
+      </AppWrapper>
     </>
-  )
-}
+  );
+};
 
 export default App;
