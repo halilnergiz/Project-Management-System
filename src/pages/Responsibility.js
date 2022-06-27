@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const Responsibility = () => {
-  return (
-    <div>
-        Responsibility
-    </div>
-  )
-}
+  return <div>Responsibility</div>;
+};
 
-export default Responsibility
+export default Responsibility;
