@@ -3,20 +3,10 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const SidebarItem = styled.div`
-  .sidebar {
-    width: min-content;
-    flex-shrink: 0;
-    height: 100vh;
-    overflow: auto;
-  }
-
   .sidebar-item {
-    padding: 0.75em 1em;
     display: block;
-    transition: background-color 0.15s;
-    border-radius: 5px;
+    margin: 0.75em .5rem;
     color: white;
-    margin-top: 0.5rem;
   }
 
   .sidebar-item:hover {
@@ -24,30 +14,25 @@ const SidebarItem = styled.div`
   }
 
   .sidebar-title {
+    padding: 0.75em .5em .75em 0.75em;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    width: max-content;
     font-size: 1em;
     user-select: none;
     cursor: pointer;
     color: ${(props) => props.theme.textColor};
+    transition: background-color 0.15s;
+    border-radius: 5px;
   }
 
-  span i{
-    display: inline-block;
-    width: 1.5em;
-    margin-left: 2rem;
-    }
-
   .toggle-btn{
+    margin-left: 20px;
     cursor: pointer;
     transition: transform .3s;
   }
 
-  .sidebar-title span i{
-    display: inline-block;
-    width: 1.5em;
-    margin-left: 2rem;
-  }
   .sidebar-title .toggle-btn {
     cursor: pointer;
     transition: transform 0.3s;
@@ -59,26 +44,28 @@ const SidebarItem = styled.div`
     padding-top: 0.25em;
     height: 0;
     overflow: hidden;
+    display: none;
   }
   .sidebar-item.open > .sidebar-content {
     height: auto;
+    display: block;
   }
 
   .sidebar-item.plain {
     font-size: 1em;
     color: ${(props) => props.theme.textColor};
     text-decoration: none;
+    margin-left: .75em;
+    width: max-content;
+  
   }
   .sidebar-item.plain:hover {
     text-decoration: underline;
   }
-  .sidebar-item.plain i {
-    display: inline-block;
-    width: 1.7em;
-  }
+
 `;
 
-/* eslint-disable react/prop-types */
+
 const SidebarItems = ({ item }) => {
   const [open, setOpen] = useState(false);
 
@@ -89,8 +76,8 @@ const SidebarItems = ({ item }) => {
           <div className='sidebar-title' onClick={() => setOpen(!open)}>
             <span>
               {item.title}
+              <i className="fa-solid fa-chevron-down toggle-btn"></i>
             </span>
-            <i className="fa-solid fa-chevron-down toggle-btn" style={{ marginLeft: '4px' }}></i>
           </div>
           <div className="sidebar-content">
             {item.childrens.map((child, index) => <SidebarItems key={index} item={child} />)}
