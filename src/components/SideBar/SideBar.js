@@ -2,7 +2,7 @@ import SidebarItems from './SidebarItems';
 import items from './data.json';
 import styled from 'styled-components';
 import React from 'react';
-import img from '../../logo.png';
+import logo from '../../logo.png';
 
 const SidebarContent = styled.div`
     width:min-content;
@@ -31,7 +31,7 @@ const SideBar = () => {
 
   return (
     <SidebarContent>
-      <Logo src={`${img}`} />
+      <Logo src={`${logo}`} />
       <SidebarText>
         {items.map((item, index) => <SidebarItems key={index} item={item} />)}
       </SidebarText>

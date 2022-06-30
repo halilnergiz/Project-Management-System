@@ -1,10 +1,12 @@
 import React from 'react';
 import { Layout, Issue, Projects, Responsibility, NoMatch, Home } from './pages';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 const routes = [
   {
     path: '/',
-    element: <Layout />,
+    element: <Register />,
     children: [
       { index: true, element: <Home /> },
       {
