@@ -5,20 +5,28 @@ import Register from './pages/Register';
 
 const routes = [
   {
-    path: '/',
-    element: <Register />,
+    path:'/',
+    element: <Login/>
+  },
+  {
+    path:'/register',
+    element: <Register/>
+  },
+  {
+    path: '/dashboard',
+    element: <Layout />,
     children: [
       { index: true, element: <Home /> },
       {
-        path: '/projects',
+        path: 'dashboard/projects',
         element: <Projects />,
       },
       {
-        path: '/responsibility',
+        path: 'dashboard/responsibility',
         element: <Responsibility />,
       },
       {
-        path: '/issues',
+        path: 'dashboard/issues',
         element: <Issue />,
       },
     ],

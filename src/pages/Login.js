@@ -4,7 +4,7 @@ import loginLogo from '../login-logo.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
+import { Form, TextInput, ErrorMessage, Submit, NavButton, Title } from '../styled-components/Reusable-Components';
 
 const LoginContent = styled.div`
     height: 100vh;
@@ -13,17 +13,39 @@ const LoginContent = styled.div`
     justify-content: space-between;
 `;
 
-const LoginForm = styled.div`
-    border-radius: 0px 500px 0px 0px;
-    height: 100%;
-    width: 50%;
-    background-color: #161616;
+const LoginFormContent = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 0px 500px 0px 0px;
+    height: 100%;
+    width: 50%;
+    background-color: #161616;
 `;
 
+const FormLogin = styled(Form)`
+  width: 32%;
+`;
+
+const TitleLogin = styled(Title)`
+  margin-bottom: 2.5rem;
+  margin-left: 38%;
+`;
+
+const TextInputLogin = styled(TextInput)`
+  height: 25px;
+`;
+
+const LoginSubmit = styled(Submit)`
+  background-color: white;
+`;
+
+const GoRegister = styled(NavButton)`
+    margin-top: 3rem;
+`;
+
+/* Logo Side */
 const LogoSide = styled.div`
     height: 100%;
     width: 50%;
@@ -31,8 +53,7 @@ const LogoSide = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    user-select: none;
-
+    user-select: none;  
 `;
 
 const Logo = styled.img`
@@ -47,49 +68,7 @@ Logo.defaultProps = {
   src: loginLogo
 };
 
-export const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-`;
 
-export const Email = styled.input`
-    border: none;
-    outline: none;
-    padding: 5px;
-    border-radius: 3px;
-`;
-
-export const Password = styled.input`
-    border: none;
-    outline: none;
-    padding: 5px;
-    border-radius: 3px;
-`;
-
-export const Submit = styled.input`
-    border: none;
-    outline: none;
-    padding: 5px;
-    border-radius: 3px;
-
-    cursor: pointer;
-`;
-
-export const ErrorMessage = styled.p`
-    color: white;
-`;
-
-const Register = styled.button`
-    margin-top: 2rem;
-    border: none;
-    outline: none;
-    padding: 5px 30px;
-    border-radius: 3px;
-
-    cursor: pointer;
-    background-color: #EE8C3A;
-`;
 
 const schema = yup.object({
   email: yup.string().email().max(50).required(),
@@ -101,22 +80,24 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   });
+
   const onSubmit = data => console.log(data);
 
   return (
     <LoginContent>
-      <LoginForm>
-        <Form onSubmit={handleSubmit(onSubmit)} autoComplete={'off'}>
-          <Email {...register('email')} placeholder='email' />
+      <LoginFormContent>
+        <FormLogin onSubmit={handleSubmit(onSubmit)} autoComplete={'off'}>
+          <TitleLogin>Login</TitleLogin>
+          <TextInputLogin {...register('email')} placeholder='email' />
           <ErrorMessage>{errors.email?.message}</ErrorMessage>
 
-          <Password {...register('password')} type='password' placeholder='password' />
+          <TextInputLogin {...register('password')} type='password' placeholder='password' />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
-          <Submit type='submit' />
-        </Form>
-        <Register>Register</Register>
-      </LoginForm>
+          <LoginSubmit type='submit' />
+        </FormLogin>
+        <GoRegister to={'/register'}>Register Now</GoRegister>
+      </LoginFormContent>
 
       <LogoSide>
         <Logo />
