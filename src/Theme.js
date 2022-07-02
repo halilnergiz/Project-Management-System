@@ -8,6 +8,4 @@ export const lightTheme = {
   textColor: 'black'
 };
 
-export const header = {
-
-};
+export const API = 'https://go-sandbox-0.herokuapp.com/api';

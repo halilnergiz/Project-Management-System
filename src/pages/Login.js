@@ -1,10 +1,16 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import styled from 'styled-components';
-import loginLogo from '../login-logo.png';
+import loginLogo from '../assets/login-logo.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Form, TextInput, ErrorMessage, Submit, NavButton, Title } from '../styled-components/Reusable-Components';
+import { Form, TextInput, ErrorMessage, Submit, NavButton, Title, RequestError } from '../styled-components/Reusable-Components';
+import axios from 'axios';
+import { observer } from 'mobx-react';
+import { API } from '../Theme';
+import { useNavigate } from 'react-router-dom';
+import 'babel-polyfill';
 
 const LoginContent = styled.div`
     height: 100vh;
@@ -68,35 +74,70 @@ Logo.defaultProps = {
   src: loginLogo
 };
 
-
-
+/* yup Schema */
 const schema = yup.object({
   email: yup.string().email().max(50).required(),
-  password: yup.string().min(4).max(20).required(),
+  password: yup.string().min(3).max(20).required(),
 }).required();
 
-const Login = () => {
+
+
+const Login = observer(({ store }) => {
+  
+  const navigate = useNavigate();
+  localStorage.setItem('clientToken',null);
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   });
 
-  const onSubmit = data => console.log(data);
+  const Authentication = async (user) => {
+    console.log(user);
+    
+    await axios.post(`${API}/auth/login`, {
+      email: user.email,
+      password: user.password
+    })
+      .then(response => {
+        console.log(response);
+        console.log(response.status);
+        
+        if(response.status == 200){
+          const clientToken = response.data.data.token;
+          localStorage.setItem('clientToken',clientToken);
+
+          console.log('yes');
+          navigate('/dashboard');
+        }
+
+      })
+      .catch(err => {
+        console.log(err);
+        store.loginInfMessage = err.response.data.message+' !';
+        localStorage.setItem('clientToken',undefined);
+      });
+  };
 
   return (
     <LoginContent>
       <LoginFormContent>
-        <FormLogin onSubmit={handleSubmit(onSubmit)} autoComplete={'off'}>
-          <TitleLogin>Login</TitleLogin>
+
+        <FormLogin onSubmit={handleSubmit(Authentication)} autoComplete={'off'}>
+          <Title>Login</Title>
           <TextInputLogin {...register('email')} placeholder='email' />
           <ErrorMessage>{errors.email?.message}</ErrorMessage>
 
           <TextInputLogin {...register('password')} type='password' placeholder='password' />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
-          <LoginSubmit type='submit' />
+          <LoginSubmit type='submit'/>
+
+          <RequestError>{store.loginInfMessage}</RequestError> 
+
         </FormLogin>
-        <GoRegister to={'/register'}>Register Now</GoRegister>
+
+        <GoRegister to={'/register'} onClick={()=> store.loginInfMessage=''}>Register Now</GoRegister>
+
       </LoginFormContent>
 
       <LogoSide>
@@ -104,6 +145,6 @@ const Login = () => {
       </LogoSide>
     </LoginContent>
   );
-};
+});
 
 export default Login;

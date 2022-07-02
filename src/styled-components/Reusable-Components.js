@@ -1,18 +1,17 @@
-/* eslint-disable linebreak-style */
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Form = styled.form`
-display: flex;
-flex-direction: column;
-justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 `;
 
 export const TextInput = styled.input`
-border: none;
-outline: none;
-padding: 10px;
-border-radius: 3px;
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 3px;
 `;
 
 export const ErrorMessage = styled.p`
@@ -44,5 +43,11 @@ export const NavButton = styled(Link)`
 `;
 
 export const Title = styled.h2`
-color: white;
+    color: white;
+    user-select: none;
+`;
+
+export const RequestError = styled.span`
+    color: white;
+    margin-top: 10%;
 `;

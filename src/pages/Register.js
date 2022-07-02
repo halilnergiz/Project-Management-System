@@ -5,8 +5,11 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import loginLogo from '../login-logo.png';
-import { Form, TextInput, ErrorMessage, Submit, NavButton } from '../styled-components/Reusable-Components';
+import loginLogo from '../assets/login-logo.png';
+import { Form, TextInput, ErrorMessage, Submit, NavButton, RequestError } from '../styled-components/Reusable-Components';
+import axios from 'axios';
+import { API } from '../Theme';
+import { observer } from 'mobx-react';
 
 const RegisterContent = styled.div`
     height: 100%;
@@ -31,22 +34,30 @@ const RegisterFormContent = styled.div`
 
 const FormRegister = styled(Form)`
     width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const Title = styled.h2`
     color: white;
-    position: relative;
-    top: -20px;
-    left: 30%;
+    user-select: none;
 `;
 
 const TextInputRegister = styled(TextInput)`
     height: 25px;
+    width: 100%;
 `;
 
 const SubmitRegister = styled(Submit)`
     background-color: white;
+    width: 103%;
 `;
+
+// const RequestError = styled.span`
+//     color: white;
+//     margin-top: 10%;
+// `;
 
 const ComeLogin = styled(NavButton)`
     margin-top: 4rem;
@@ -78,24 +89,43 @@ Logo.defaultProps = {
     src: loginLogo
 };
 
+
+
 const schema = yup.object({
     name: yup.string().max(50).required(),
     email: yup.string().email().max(50).required(),
     password: yup.string().min(4).max(20).required(),
 }).required();
 
-const Register = () => {
+
+const Register = observer(({ store }) => {
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     });
-    const onSubmit = data => console.log(data);
 
+    const checkRegister = (data) => {
+        console.log(data);
+        axios.post(`${API}/auth/register`, {
+            email: data.email,
+            name: data.name,
+            password: data.password
+        })
+        .then(response => {
+            console.log(response);
+            store.registerInfMessage = 'Account Successfully Created!';
+        })
+        .catch(err => {
+            console.log(err);
+            console.log(err.response.data.errors[0]);
+            store.registerInfMessage = `Error: ${err.response.data.errors[0]} error!`;
+        });
+    };
+    
     return (
         <RegisterContent>
 
             <RegisterLogoSide>
                 <Logo />
-                {/* <İcon className="fa-2xl fa-solid fa-angles-down"></İcon>  */}
                 <İcon className="fa-xl fa-solid fa-diagram-project"></İcon>
                 <h2>Bize Katıl</h2>
                 <h2>Geleceğe Adım At</h2>
@@ -103,7 +133,8 @@ const Register = () => {
             </RegisterLogoSide>
 
             <RegisterFormContent>
-                <FormRegister onSubmit={handleSubmit(onSubmit)} autoComplete='off' >
+
+                <FormRegister onSubmit={handleSubmit(checkRegister)} autoComplete='off' >
                     <Title>Register</Title>
                     <TextInputRegister {...register('name')} placeholder='name' />
                     <ErrorMessage>{errors.name?.message}</ErrorMessage>
@@ -115,12 +146,18 @@ const Register = () => {
                     <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
                     <SubmitRegister type="submit" value='Register' />
+
+                    <RequestError>{store.registerInfMessage}</RequestError> 
                 </FormRegister>
-                <ComeLogin to={'/'}>Back To Login Page</ComeLogin>
+
+                <ComeLogin to={'/'} onClick={()=> store.registerInfMessage=''}>Back To Login</ComeLogin>
+
             </RegisterFormContent>
+
+
 
         </RegisterContent>
     );
-};
+});
 
 export default Register;

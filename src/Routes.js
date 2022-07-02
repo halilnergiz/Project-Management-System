@@ -1,34 +1,23 @@
 import React from 'react';
-import { Layout, Issue, Projects, Responsibility, NoMatch, Home } from './pages';
+import { Layout, NoMatch, Home } from './pages';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import store from './Store';
 
 const routes = [
   {
     path:'/',
-    element: <Login/>
+    element: <Login store={store}/>
   },
   {
     path:'/register',
-    element: <Register/>
+    element: <Register store={store}/>
   },
   {
     path: '/dashboard',
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-      {
-        path: 'dashboard/projects',
-        element: <Projects />,
-      },
-      {
-        path: 'dashboard/responsibility',
-        element: <Responsibility />,
-      },
-      {
-        path: 'dashboard/issues',
-        element: <Issue />,
-      },
     ],
   },
 

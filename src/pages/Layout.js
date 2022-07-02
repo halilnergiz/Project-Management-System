@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import Header from './components/Header';
-import SideBar from './components/SideBar/SideBar';
+import Header from '../components/Header';
+import SideBar from '../components/SideBar/SideBar';
 import styled, { ThemeProvider } from 'styled-components';
 // eslint-disable-next-line no-unused-vars
-import { lightTheme, darkTheme } from './Theme';
+import { lightTheme, darkTheme } from '../Theme';
 
 
 const LayoutWrapper = styled.div`
