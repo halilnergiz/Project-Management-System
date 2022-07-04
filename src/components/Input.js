@@ -20,11 +20,11 @@ const TextLabel = styled.label`
 `;
 
 // eslint-disable-next-line react/display-name
-const Input = React.forwardRef(({ name, onChange, onBlur, errorMessage, inputType, labelName }, ref) => {
+const Input = React.forwardRef(({ name, onBlur, onChange, errorMessage, labelName, inputType }, ref) => {
   return (
     <>
       <TextLabel>{`${labelName}`}</TextLabel>
-      <TextInput name={name} onChange={onChange} onBlur={onBlur} ref={ref} type={inputType} />
+      <TextInput name={name} onBlur={onBlur} onChange={onChange} ref={ref} type={inputType}/>
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </>
   );

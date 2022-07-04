@@ -11,10 +11,9 @@ import { API } from '../Theme';
 import 'babel-polyfill';
 import Input from '../components/Input';
 import { useNavigate } from 'react-router-dom';
-// import schema from '../yup/Schema';
 import * as yup from 'yup';
 
-
+/* Login Form Style*/
 const LoginContent = styled.div`
     height: 100vh;
     display: flex;
@@ -42,16 +41,11 @@ const TitleLogin = styled(Title)`
   margin-left: 38%;
 `;
 
-
-// const LoginSubmit = styled(Submit)`
-//   background-color: white;
-// `;
-
 const GoRegister = styled(NavButton)`
     margin-top: 3rem;
 `;
 
-/* Logo Side */
+/* Logo Style */
 const LogoSide = styled.div`
     height: 100%;
     width: 50%;
@@ -74,10 +68,10 @@ Logo.defaultProps = {
   src: loginLogo
 };
 
-
+/* yup Register schema*/
 export const schema = yup.object({
   email: yup.string().email().max(50).required(),
-  // password: yup.string().min(3).max(20).required()
+  password: yup.string().min(3).max(20).required()
 }).required();
 
 const Login = observer(({ store }) => {
@@ -105,6 +99,7 @@ const Login = observer(({ store }) => {
         if (response.status == 200) {
           const clientToken = response.data.data.token;
           localStorage.setItem('clientToken', clientToken);
+          store.loginInfMessage = '';
 
           console.log('yes');
           navigate('/dashboard');
@@ -121,13 +116,12 @@ const Login = observer(({ store }) => {
   return (
     <LoginContent>
       <LoginFormContent>
-        {console.log(register('email'))}
-        <FormLogin onSubmit={handleSubmit(Authentication)} autoComplete={'off'}>
-          <Title>Login</Title>
 
+        <FormLogin onSubmit={handleSubmit(Authentication)} autoComplete={'off'}>
+
+          <Title>Login</Title>
           <Input {...register('email')} errorMessage={errors.email?.message} labelName={'email'} />
           <Input {...register('password')} errorMessage={errors.password?.message} inputType='password' labelName={'password'} />
-          
           <Submit type='submit' />
 
           <RequestError>{store.loginInfMessage}</RequestError>
@@ -140,6 +134,7 @@ const Login = observer(({ store }) => {
       <LogoSide>
         <Logo />
       </LogoSide>
+
     </LoginContent>
   );
 });

@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import loginLogo from '../assets/login-logo.png';
-import { Form, ErrorMessage, Submit, NavButton, RequestError } from '../Atoms/Atoms';
+import { Form, Submit, NavButton, RequestError } from '../Atoms/Atoms';
 import axios from 'axios';
 import { API } from '../Theme';
 import { observer } from 'mobx-react';
 import * as yup from 'yup';
 import Input from '../components/Input';
 
+/* Register Form Style */
 const RegisterContent = styled.div`
     height: 100%;
     width: 100%;
@@ -33,9 +34,6 @@ const RegisterFormContent = styled.div`
 
 const FormRegister = styled(Form)`
     width: 50%;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
 `;
 
 const Title = styled.h2`
@@ -43,22 +41,12 @@ const Title = styled.h2`
     user-select: none;
 `;
 
-
-// const SubmitRegister = styled(Submit)`
-//     background-color: white;
-//     width: 103%;
-// `;
-
-// const RequestError = styled.span`
-//     color: white;
-//     margin-top: 10%;
-// `;
-
 const ComeLogin = styled(NavButton)`
     margin-top: 4rem;
     background-color: #EE8C3A;
 `;
-/* Left Side */
+
+/* Logo Style */
 const RegisterLogoSide = styled.div`
     width: 50%;
     height: 100%;
@@ -118,25 +106,24 @@ const Register = observer(({ store }) => {
 
   return (
     <RegisterContent>
-
       <RegisterLogoSide>
+
         <Logo />
         <İcon className="fa-xl fa-solid fa-diagram-project"></İcon>
         <h2>Bize Katıl</h2>
         <h2>Geleceğe Adım At</h2>
         <h3>Projelerini adım adım takip et, kısa sürede çok iş başar!</h3>
+        
       </RegisterLogoSide>
 
       <RegisterFormContent>
 
         <FormRegister onSubmit={handleSubmit(checkRegister)} autoComplete='off' >
-          <Title>Register</Title>
 
-          <Input {...register('name')} errorMessage={errors.name?.message} labelName={'name'} />
+          <Title>Register</Title>
+          <Input {...register('name')} errorMessage={errors.name?.message} labelName = 'name' />
           <Input {...register('email')} errorMessage={errors.email?.message} labelName={'email'} />
           <Input {...register('password')} errorMessage={errors.password?.message} inputType='password' labelName={'password'} />
-
-
           <Submit type="submit" value='Register' />
 
           <RequestError>{store.registerInfMessage}</RequestError>
@@ -145,9 +132,6 @@ const Register = observer(({ store }) => {
         <ComeLogin to={'/'} onClick={() => store.registerInfMessage = ''}>Back To Login</ComeLogin>
 
       </RegisterFormContent>
-
-
-
     </RegisterContent>
   );
 });
