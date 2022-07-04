@@ -12,21 +12,21 @@ export const TextInput = styled.input`
     outline: none;
     padding: 10px;
     border-radius: 3px;
+    height: 25px;
 `;
 
 export const ErrorMessage = styled.p`
-color: white;
+    color: white;
 `;
 
 export const Submit = styled.input`
-    /* margin-top: 2rem; */
     border: none;
     outline: none;
     padding: 10px 30px;
     border-radius: 3px;
 
     cursor: pointer;
-    background-color: #EE8C3A;
+    background-color: white;
 `;
 
 export const NavButton = styled(Link)`
@@ -39,7 +39,6 @@ export const NavButton = styled(Link)`
 
     cursor: pointer;
     background-color: #EE8C3A;
-    
 `;
 
 export const Title = styled.h2`
