@@ -28,12 +28,12 @@ const AppWrapper = styled.div`
 const App = () => {
   const routing = useRoutes(routes);
   return (
-    
+
     <AppWrapper>
       <GlobalStyle />
       {routing}
     </AppWrapper>
-    
+
   );
 };
 

@@ -39,33 +39,17 @@ const Logout = styled(NavLink)`
   user-select: none;
 `;
 
-// const Account = styled.div`
-//   position: relative;
-//   width: 35px;
-//   height: 35px;
-//   right: 1rem;
-//   border-radius: 100%;
-//   background-color: white;
-//   border: 1px solid black;
-// `;
 
 const Header = () => {
   return (
     <ContentHeader>
       <NavBar>
-        {/* <Item>
-          <NavLink to={'/projects'}>Projects</NavLink>
-        </Item>
-        <Item>
-          <NavLink to={'/responsibility'}>Responsiblity</NavLink>
-        </Item>
-        <Item>
-          <NavLink to={'/issues'}>Issues</NavLink>
-        </Item> */}
+
       </NavBar>
 
-      <Logout to={'/'}>Logout</Logout>
-      {/* <Account /> */}
+
+
+      <Logout to={'/'} onClick={() => localStorage.setItem('clientToken', null)}>Logout</Logout>
     </ContentHeader>
   );
 };

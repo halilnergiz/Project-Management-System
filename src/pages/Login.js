@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import loginLogo from '../assets/login-logo.png';
 import { useForm } from 'react-hook-form';
@@ -12,6 +12,8 @@ import 'babel-polyfill';
 import Input from '../components/Input';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
+import NoMatch from './NoMatch';
+import Layout from './Layout';
 
 /* Login Form Style*/
 const LoginContent = styled.div`
@@ -68,48 +70,39 @@ Logo.defaultProps = {
   src: loginLogo
 };
 
-/* yup Register schema*/
+// reset localStorage
+
+/* yup Register schema */
 export const schema = yup.object({
   email: yup.string().email().max(50).required(),
   password: yup.string().min(3).max(20).required()
 }).required();
 
+// Login Component 
 const Login = observer(({ store }) => {
+  const navigate = useNavigate();
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   });
 
-
-  const navigate = useNavigate();
-  localStorage.setItem('clientToken', null);
-
-
   const Authentication = async (user) => {
-    console.log(user);
-
     await axios.post(`${API}/auth/login`, {
       email: user.email,
       password: user.password
     })
       .then(response => {
         console.log(response);
-        console.log(response.status);
-
         if (response.status == 200) {
           const clientToken = response.data.data.token;
           localStorage.setItem('clientToken', clientToken);
           store.loginInfMessage = '';
-
-          console.log('yes');
           navigate('/dashboard');
         }
-
       })
       .catch(err => {
-        console.log(err);
         store.loginInfMessage = err.response.data.message + ' !';
-        localStorage.setItem('clientToken', undefined);
+        localStorage.setItem('clientToken', null);
       });
   };
 
@@ -118,7 +111,6 @@ const Login = observer(({ store }) => {
       <LoginFormContent>
 
         <FormLogin onSubmit={handleSubmit(Authentication)} autoComplete={'off'}>
-
           <Title>Login</Title>
           <Input {...register('email')} errorMessage={errors.email?.message} labelName={'email'} />
           <Input {...register('password')} errorMessage={errors.password?.message} inputType='password' labelName={'password'} />

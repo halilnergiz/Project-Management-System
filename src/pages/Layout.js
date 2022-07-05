@@ -5,6 +5,7 @@ import SideBar from '../components/SideBar/SideBar';
 import styled, { ThemeProvider } from 'styled-components';
 // eslint-disable-next-line no-unused-vars
 import { lightTheme, darkTheme } from '../Theme';
+import NoMatch from './NoMatch';
 
 
 const LayoutWrapper = styled.div`
@@ -35,29 +36,35 @@ const OutletWrapper = styled.div`
 const Layout = () => {
   const [theme] = useState(darkTheme);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <LayoutWrapper>
-        <SideBar />
+  if (localStorage.getItem('clientToken') !== 'null') {
+    return (
+      <ThemeProvider theme={theme}>
+        <LayoutWrapper>
+          <SideBar />
 
-        <MainLayout>
+          <MainLayout>
 
-          <Header />
+            <Header />
 
-          {/* Change Theme Code */}
-          {/* <ChangeTheme onClick={() => setTheme(theme == lightTheme ? darkTheme : lightTheme)}>
+            {/* Change Theme Code */}
+            {/* <ChangeTheme onClick={() => setTheme(theme == lightTheme ? darkTheme : lightTheme)}>
             theme
           </ChangeTheme> */}
+          
+            <OutletWrapper>
+              <Outlet />
+            </OutletWrapper>
 
-          <OutletWrapper>
-            <Outlet />
-          </OutletWrapper>
+          </MainLayout>
 
-        </MainLayout>
-
-      </LayoutWrapper>
-    </ThemeProvider>
-  );
+        </LayoutWrapper>
+      </ThemeProvider>
+    );
+  } else {
+    return (
+      <NoMatch />
+    );
+  }
 };
 
 export default Layout;

@@ -1,14 +1,16 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const NotFound = styled.h1`
+    display: flex;
+    justify-content: center;
+`;
 
 const NoMatch = () => {
   return (
-    <div>
-      NO PAGE
-      {/* <p>
-        <Link to="/dashboard">Go to the home page</Link>
-      </p> */}
-    </div>
+    <NotFound>
+      404 NOT FOUND!
+    </NotFound>
   );
 };
 
