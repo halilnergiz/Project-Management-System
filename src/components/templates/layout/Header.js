@@ -47,9 +47,8 @@ const Header = () => {
 
       </NavBar>
 
-
-
       <Logout to={'/'} onClick={() => localStorage.setItem('clientToken', null)}>Logout</Logout>
+      
     </ContentHeader>
   );
 };

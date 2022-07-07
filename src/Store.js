@@ -5,10 +5,11 @@ configure({
 });
 
 class Store {
+
   // login - register error messages  
   registerInfMessage;
   loginInfMessage;
-  token;
+
   constructor(){
     makeAutoObservable(this);
   }

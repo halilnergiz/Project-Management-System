@@ -2,13 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import loginLogo from '../assets/login-logo.png';
-import { Form, Submit, NavButton, RequestError } from '../Atoms/Atoms';
+import loginLogo from '../../assets/login-logo.png';
+import { Form } from '../UI/atoms/Form.js';
+import {Title, RequestError } from '../UI/atoms/Texts.js';
+import {Submit, NavButton } from '../UI/atoms/Buttons.js';
 import axios from 'axios';
-import { API } from '../Theme';
+import { API } from '../UI/Theme';
 import { observer } from 'mobx-react';
 import * as yup from 'yup';
-import Input from '../components/Input';
+import Input from '../templates/form-input/Input';
 
 /* Register Form Style */
 const RegisterContent = styled.div`
@@ -27,23 +29,12 @@ const RegisterFormContent = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
     background-color:#161616;
     border-radius: 10% 0% 0% 10% / 40% 0% 0% 40% ;
 `;
 
 const FormRegister = styled(Form)`
     width: 50%;
-`;
-
-const Title = styled.h2`
-    color: white;
-    user-select: none;
-`;
-
-const ComeLogin = styled(NavButton)`
-    margin-top: 4rem;
-    background-color: #EE8C3A;
 `;
 
 /* Logo Style */
@@ -129,7 +120,7 @@ const Register = observer(({ store }) => {
           <RequestError>{store.registerInfMessage}</RequestError>
         </FormRegister>
 
-        <ComeLogin to={'/'} onClick={() => store.registerInfMessage = ''}>Back To Login</ComeLogin>
+        <NavButton to={'/'} onClick={() => store.registerInfMessage = ''}>Back To Login</NavButton>
 
       </RegisterFormContent>
     </RegisterContent>

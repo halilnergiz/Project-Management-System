@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { useRoutes } from 'react-router';
-import routes from './Routes';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
+import routes from './Routes';
 
 const GlobalStyle = createGlobalStyle`
  html {
@@ -28,12 +28,10 @@ const AppWrapper = styled.div`
 const App = () => {
   const routing = useRoutes(routes);
   return (
-
     <AppWrapper>
       <GlobalStyle />
       {routing}
     </AppWrapper>
-
   );
 };
 

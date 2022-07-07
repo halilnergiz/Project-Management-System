@@ -1,8 +1,6 @@
 import React from 'react';
-import { Layout, NoMatch, Home } from './pages';
-import Login from './pages/Login';
-import Register from './pages/Register';
 import store from './Store';
+import {Register, Login, Home, Layout, NoMatch} from './components/pages';
 
 const routes = [
   {

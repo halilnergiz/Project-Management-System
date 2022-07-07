@@ -2,7 +2,7 @@ import SidebarItems from './SidebarItems';
 import items from './data.json';
 import styled from 'styled-components';
 import React from 'react';
-import logo from '../../assets/logo.png';
+import logo from '../../../../assets/logo.png';
 
 const SidebarContent = styled.div`
     width:min-content;

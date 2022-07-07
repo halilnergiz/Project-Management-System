@@ -1,21 +1,22 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import loginLogo from '../assets/login-logo.png';
+import loginLogo from '../../assets/login-logo.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Form, TextInput, ErrorMessage, Submit, NavButton, Title, RequestError } from '../Atoms/Atoms';
-import axios from 'axios';
-import { observer } from 'mobx-react';
-import { API } from '../Theme';
-import 'babel-polyfill';
-import Input from '../components/Input';
-import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
-import NoMatch from './NoMatch';
-import Layout from './Layout';
+import { useNavigate } from 'react-router-dom';
+import { observer } from 'mobx-react';
+import axios from 'axios';
 
-/* Login Form Style*/
+import { Form } from '../UI/atoms/Form.js';
+import {Title, RequestError } from '../UI/atoms/Texts';
+import {Submit, NavButton } from '../UI/atoms/Buttons.js';
+import {API} from '../UI/Theme';
+import 'babel-polyfill';
+import Input from '../templates/form-input/Input';
+
+/* Login Form Style */
 const LoginContent = styled.div`
     height: 100vh;
     display: flex;
@@ -24,27 +25,18 @@ const LoginContent = styled.div`
 `;
 
 const LoginFormContent = styled.div`
+    height: 100%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 0px 500px 0px 0px;
-    height: 100%;
-    width: 50%;
     background-color: #161616;
 `;
 
 const FormLogin = styled(Form)`
   width: 32%;
-`;
-
-const TitleLogin = styled(Title)`
-  margin-bottom: 2.5rem;
-  margin-left: 38%;
-`;
-
-const GoRegister = styled(NavButton)`
-    margin-top: 3rem;
 `;
 
 /* Logo Style */
@@ -70,8 +62,6 @@ Logo.defaultProps = {
   src: loginLogo
 };
 
-// reset localStorage
-
 /* yup Register schema */
 export const schema = yup.object({
   email: yup.string().email().max(50).required(),
@@ -80,6 +70,7 @@ export const schema = yup.object({
 
 // Login Component 
 const Login = observer(({ store }) => {
+
   const navigate = useNavigate();
 
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -119,7 +110,7 @@ const Login = observer(({ store }) => {
           <RequestError>{store.loginInfMessage}</RequestError>
         </FormLogin>
 
-        <GoRegister to={'/register'} onClick={() => store.loginInfMessage = ''}>Register Now</GoRegister>
+        <NavButton to={'/register'} onClick={() => store.loginInfMessage = ''}>Register Now</NavButton>
 
       </LoginFormContent>
 
