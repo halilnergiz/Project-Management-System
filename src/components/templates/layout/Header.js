@@ -8,7 +8,7 @@ const ContentHeader = styled.div`
     display: flex; 
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid gray;
+    /* border-bottom: 1px solid gray; */
     background-color: ${(props) => props.theme.bgColor};
     padding: .2rem;
 `;

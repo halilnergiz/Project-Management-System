@@ -7,5 +7,3 @@ export const lightTheme = {
   bgColor: 'white',
   textColor: 'black'
 };
-
-export const API = 'https://go-sandbox-0.herokuapp.com/api';

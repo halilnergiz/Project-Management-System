@@ -1,9 +1,9 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
+import styled, { ThemeProvider } from 'styled-components';
 import { useRoutes } from 'react-router';
-import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 import routes from './Routes';
+import { observer } from 'mobx-react';
 
 const GlobalStyle = createGlobalStyle`
  html {
@@ -25,14 +25,18 @@ const AppWrapper = styled.div`
   padding: 0;
 `;
 
-const App = () => {
+
+const App = observer(({store}) => {
   const routing = useRoutes(routes);
+  
   return (
-    <AppWrapper>
-      <GlobalStyle />
-      {routing}
-    </AppWrapper>
+    <ThemeProvider theme={store.theme} >
+      <AppWrapper>
+        <GlobalStyle />
+        {routing}
+      </AppWrapper>
+    </ThemeProvider>
   );
-};
+});
 
 export default App;

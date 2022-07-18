@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import axios from 'axios';
+import { observer } from 'mobx-react';
+
 import loginLogo from '../../assets/login-logo.png';
+import Input from '../templates/form-input/Input';
 import { Form } from '../UI/atoms/Form.js';
 import {Title, RequestError } from '../UI/atoms/Texts.js';
 import {Submit, NavButton } from '../UI/atoms/Buttons.js';
-import axios from 'axios';
-import { API } from '../UI/Theme';
-import { observer } from 'mobx-react';
-import * as yup from 'yup';
-import Input from '../templates/form-input/Input';
 
 /* Register Form Style */
 const RegisterContent = styled.div`
@@ -20,6 +20,7 @@ const RegisterContent = styled.div`
     flex-direction: row;
     justify-content: center;
     position: relative;
+    font-family: 'Montserrat', sans-serif;
 `;
 
 const RegisterFormContent = styled.div`
@@ -31,6 +32,7 @@ const RegisterFormContent = styled.div`
     align-items: center;
     background-color:#161616;
     border-radius: 10% 0% 0% 10% / 40% 0% 0% 40% ;
+    text-transform: capitalize;
 `;
 
 const FormRegister = styled(Form)`
@@ -63,23 +65,54 @@ Logo.defaultProps = {
   src: loginLogo
 };
 
-
-/* yup Register Schema */
+// yup Register Schema 
 const schema = yup.object({
   name: yup.string().min(3).max(50).required(),
   email: yup.string().email().max(50).required(),
-  password: yup.string().min(4).max(20).required(),
+  password: yup.string().min(8).max(20).required(),
 }).required();
 
-
+// Register Component
 const Register = observer(({ store }) => {
+
+  const API_URL = process.env.API_URL;
+
+  // yup & useForm integration
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   });
 
+  // register request
   const checkRegister = async (data) => {
+    
+    axios.interceptors.request.use(
+      (req) => {
+        console.log(req);
+        return req;
+      },
+      (err) => {
+        console.log(err);
+        return Promise.reject(err);
+      }
+    );
+
+    axios.interceptors.response.use(
+      (res) => {
+        console.log(res);
+        return res;
+      },
+      (err) => {
+        console.log(err);
+        console.log();
+        err.response.request.status == 409 ? window.alert('Bu email kullanılıyor. Giriş yapmak için Login sayfasına gidin') : undefined;
+        store.registerInfMessage = 'email kullanımda';
+        err.response.data.message = 'email kullanımda!!';
+        return Promise.reject(err);
+      }
+    );
+
     console.log(data);
-    await axios.post(`${API}/auth/register`, {
+    await axios.post(`${API_URL}/auth/register`, {
       email: data.email,
       name: data.name,
       password: data.password
@@ -90,8 +123,8 @@ const Register = observer(({ store }) => {
       })
       .catch(err => {
         console.log(err);
-        console.log(err.response.data.errors[0]);
-        store.registerInfMessage = `Error: ${err.response.data.errors[0]} error!`;
+        console.log(err.response.data.message);
+        store.registerInfMessage = `Error: ${err.response.data.message}`;
       });
   };
 

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import loginLogo from '../../assets/login-logo.png';
 import { useForm } from 'react-hook-form';
@@ -12,7 +12,6 @@ import axios from 'axios';
 import { Form } from '../UI/atoms/Form.js';
 import {Title, RequestError } from '../UI/atoms/Texts';
 import {Submit, NavButton } from '../UI/atoms/Buttons.js';
-import {API} from '../UI/Theme';
 import 'babel-polyfill';
 import Input from '../templates/form-input/Input';
 
@@ -22,6 +21,8 @@ const LoginContent = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: capitalize;
 `;
 
 const LoginFormContent = styled.div`
@@ -71,14 +72,41 @@ export const schema = yup.object({
 // Login Component 
 const Login = observer(({ store }) => {
 
-  const navigate = useNavigate();
+  const API_URL = process.env.API_URL;
 
+  const navigate = useNavigate();
+  // yup & useForm integration
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   });
 
+  // login request - authentication
   const Authentication = async (user) => {
-    await axios.post(`${API}/auth/login`, {
+    axios.interceptors.request.use(
+      (req) => {
+        console.log(req);
+        return req;
+      },
+      (err) => {
+        console.log(err);
+        return Promise.reject(err);
+      }
+    );
+
+    axios.interceptors.response.use(
+      (res) => {
+        console.log(res);
+        return res;
+      },
+      (err) => {
+        console.log(err);
+        console.log();
+        // err.response.request.status == 401 ? window.location.href = '/' : undefined;
+        return Promise.reject(err);
+      }
+    );
+
+    await axios.post(`${API_URL}/auth/login`, {
       email: user.email,
       password: user.password
     })
@@ -100,7 +128,6 @@ const Login = observer(({ store }) => {
   return (
     <LoginContent>
       <LoginFormContent>
-
         <FormLogin onSubmit={handleSubmit(Authentication)} autoComplete={'off'}>
           <Title>Login</Title>
           <Input {...register('email')} errorMessage={errors.email?.message} labelName={'email'} />
