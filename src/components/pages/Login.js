@@ -10,7 +10,7 @@ import { observer } from 'mobx-react';
 import axios from 'axios';
 
 import { Form } from '../UI/atoms/Form.js';
-import {Title, RequestError } from '../UI/atoms/Texts';
+import {Title, RequestMessage } from '../UI/atoms/Texts';
 import {Submit, NavButton } from '../UI/atoms/Buttons.js';
 import 'babel-polyfill';
 import Input from '../templates/form-input/Input';
@@ -66,7 +66,7 @@ Logo.defaultProps = {
 /* yup Register schema */
 export const schema = yup.object({
   email: yup.string().email().max(50).required(),
-  password: yup.string().min(3).max(20).required()
+  password: yup.string().min(8).max(25).required()
 }).required();
 
 // Login Component 
@@ -82,38 +82,15 @@ const Login = observer(({ store }) => {
 
   // login request - authentication
   const Authentication = async (user) => {
-    axios.interceptors.request.use(
-      (req) => {
-        console.log(req);
-        return req;
-      },
-      (err) => {
-        console.log(err);
-        return Promise.reject(err);
-      }
-    );
-
-    axios.interceptors.response.use(
-      (res) => {
-        console.log(res);
-        return res;
-      },
-      (err) => {
-        console.log(err);
-        console.log();
-        // err.response.request.status == 401 ? window.location.href = '/' : undefined;
-        return Promise.reject(err);
-      }
-    );
 
     await axios.post(`${API_URL}/auth/login`, {
       email: user.email,
       password: user.password
     })
-      .then(response => {
-        console.log(response);
-        if (response.status == 200) {
-          const clientToken = response.data.data.token;
+      .then(res => {
+        console.log(res);
+        if (res.status == 200) {
+          const clientToken = res.data.data.token;
           localStorage.setItem('clientToken', clientToken);
           store.loginInfMessage = '';
           navigate('/dashboard');
@@ -134,10 +111,10 @@ const Login = observer(({ store }) => {
           <Input {...register('password')} errorMessage={errors.password?.message} inputType='password' labelName={'password'} />
           <Submit type='submit' />
 
-          <RequestError>{store.loginInfMessage}</RequestError>
+          <RequestMessage> {store.loginInfMessage}</RequestMessage>
         </FormLogin>
 
-        <NavButton to={'/register'} onClick={() => store.loginInfMessage = ''}>Register Now</NavButton>
+        <NavButton to={'/register'} onClick={() => store.registerInfMessage = ''}>Register Now</NavButton>
 
       </LoginFormContent>
 

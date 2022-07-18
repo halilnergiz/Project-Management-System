@@ -1,6 +1,6 @@
 import React from 'react';
 import store from './Store';
-import {Register, Login, Home, PrivateLayout, NoMatch} from './components/pages';
+import {Register, Login, Home, PrivateLayout, NoMatch, Unauthorized} from './components/pages';
 
 // route schema 
 const routes = [
@@ -18,6 +18,10 @@ const routes = [
     children: [
       { index: true, element: <Home /> }
     ],
+  },
+  {
+    path: '/unauthorized',
+    element: <Unauthorized />,
   },
   {
     path: '*',

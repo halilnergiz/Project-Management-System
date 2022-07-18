@@ -18,6 +18,9 @@ class Store {
   // login - register error messages  
   registerInfMessage;
   loginInfMessage;
+
+  // type of information message - determine the message color 
+  typeOfMessage;
 }
 
 const store = new Store;

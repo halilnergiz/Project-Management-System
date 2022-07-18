@@ -9,8 +9,9 @@ import { observer } from 'mobx-react';
 import loginLogo from '../../assets/login-logo.png';
 import Input from '../templates/form-input/Input';
 import { Form } from '../UI/atoms/Form.js';
-import {Title, RequestError } from '../UI/atoms/Texts.js';
-import {Submit, NavButton } from '../UI/atoms/Buttons.js';
+import { Title, RequestMessage } from '../UI/atoms/Texts.js';
+import { Submit, NavButton } from '../UI/atoms/Buttons.js';
+import { useNavigate } from 'react-router';
 
 /* Register Form Style */
 const RegisterContent = styled.div`
@@ -75,6 +76,8 @@ const schema = yup.object({
 // Register Component
 const Register = observer(({ store }) => {
 
+  const navigate = useNavigate();
+
   const API_URL = process.env.API_URL;
 
   // yup & useForm integration
@@ -84,32 +87,6 @@ const Register = observer(({ store }) => {
 
   // register request
   const checkRegister = async (data) => {
-    
-    axios.interceptors.request.use(
-      (req) => {
-        console.log(req);
-        return req;
-      },
-      (err) => {
-        console.log(err);
-        return Promise.reject(err);
-      }
-    );
-
-    axios.interceptors.response.use(
-      (res) => {
-        console.log(res);
-        return res;
-      },
-      (err) => {
-        console.log(err);
-        console.log();
-        err.response.request.status == 409 ? window.alert('Bu email kullanılıyor. Giriş yapmak için Login sayfasına gidin') : undefined;
-        store.registerInfMessage = 'email kullanımda';
-        err.response.data.message = 'email kullanımda!!';
-        return Promise.reject(err);
-      }
-    );
 
     console.log(data);
     await axios.post(`${API_URL}/auth/register`, {
@@ -117,13 +94,19 @@ const Register = observer(({ store }) => {
       name: data.name,
       password: data.password
     })
-      .then(response => {
-        console.log(response);
+      .then((res) => {
+        console.log(res);
         store.registerInfMessage = 'Account Successfully Created!';
+        store.typeOfMessage = true;
+        setTimeout(() => {
+          navigate('/');
+          window.alert('Please Login');
+        }, 500);
       })
       .catch(err => {
         console.log(err);
-        console.log(err.response.data.message);
+        store.typeOfMessage = false;
+        err.response.request.status == 409 ? window.alert('Bu email kullanılıyor. Giriş yapmak için Login sayfasına gidin') : undefined;
         store.registerInfMessage = `Error: ${err.response.data.message}`;
       });
   };
@@ -137,7 +120,7 @@ const Register = observer(({ store }) => {
         <h2>Bize Katıl</h2>
         <h2>Geleceğe Adım At</h2>
         <h3>Projelerini adım adım takip et, kısa sürede çok iş başar!</h3>
-        
+
       </RegisterLogoSide>
 
       <RegisterFormContent>
@@ -145,18 +128,18 @@ const Register = observer(({ store }) => {
         <FormRegister onSubmit={handleSubmit(checkRegister)} autoComplete='off' >
 
           <Title>Register</Title>
-          <Input {...register('name')} errorMessage={errors.name?.message} labelName = 'name' />
+          <Input {...register('name')} errorMessage={errors.name?.message} labelName='name' />
           <Input {...register('email')} errorMessage={errors.email?.message} labelName={'email'} />
           <Input {...register('password')} errorMessage={errors.password?.message} inputType='password' labelName={'password'} />
           <Submit type="submit" value='Register' />
 
-          <RequestError>{store.registerInfMessage}</RequestError>
+          <RequestMessage successMessage = {store.typeOfMessage}>{store.registerInfMessage}</RequestMessage>
         </FormRegister>
 
         <NavButton to={'/'} onClick={() => store.registerInfMessage = ''}>Back To Login</NavButton>
 
       </RegisterFormContent>
-    </RegisterContent>
+    </RegisterContent >
   );
 });
 

@@ -10,4 +10,7 @@ export const TextInput = styled.input`
 
 export const ErrorMessage = styled.p`
     color: white;
+    text-transform: lowercase;
+    font-size: 12px;
+    color: #f24547;
 `;
