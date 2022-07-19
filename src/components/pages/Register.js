@@ -12,6 +12,7 @@ import { Form } from '../UI/atoms/Form.js';
 import { Title, RequestMessage } from '../UI/atoms/Texts.js';
 import { Submit, NavButton } from '../UI/atoms/Buttons.js';
 import { useNavigate } from 'react-router';
+import interceptors from '../../axios_config';
 
 /* Register Form Style */
 const RegisterContent = styled.div`
@@ -78,8 +79,6 @@ const Register = observer(({ store }) => {
 
   const navigate = useNavigate();
 
-  const API_URL = process.env.API_URL;
-
   // yup & useForm integration
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
@@ -88,26 +87,26 @@ const Register = observer(({ store }) => {
   // register request
   const checkRegister = async (data) => {
 
-    console.log(data);
-    await axios.post(`${API_URL}/auth/register`, {
+    interceptors();
+
+    await axios.post('/auth/register', {
       email: data.email,
       name: data.name,
       password: data.password
     })
       .then((res) => {
-        console.log(res);
-        store.registerInfMessage = 'Account Successfully Created!';
+        store.registerInfMessage = res.statusText;
         store.typeOfMessage = true;
+
         setTimeout(() => {
           navigate('/');
           window.alert('Please Login');
         }, 500);
+        
       })
       .catch(err => {
-        console.log(err);
         store.typeOfMessage = false;
-        err.response.request.status == 409 ? window.alert('Bu email kullanılıyor. Giriş yapmak için Login sayfasına gidin') : undefined;
-        store.registerInfMessage = `Error: ${err.response.data.message}`;
+        store.registerInfMessage = err.response.data.message;
       });
   };
 
@@ -136,7 +135,7 @@ const Register = observer(({ store }) => {
           <RequestMessage successMessage = {store.typeOfMessage}>{store.registerInfMessage}</RequestMessage>
         </FormRegister>
 
-        <NavButton to={'/'} onClick={() => store.registerInfMessage = ''}>Back To Login</NavButton>
+        <NavButton to={'/'} onClick={() => store.loginInfMessage = ''}>Back To Login</NavButton>
 
       </RegisterFormContent>
     </RegisterContent >

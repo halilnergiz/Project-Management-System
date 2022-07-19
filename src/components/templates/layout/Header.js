@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ContentHeader = styled.div`
     float: right;
@@ -41,13 +41,25 @@ const Logout = styled(NavLink)`
 
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <ContentHeader>
       <NavBar>
 
       </NavBar>
 
-      <Logout to={'/'} onClick={() => localStorage.setItem('clientToken', null)}>Logout</Logout>
+      <Logout to={'/'} onClick={
+        () => { 
+          
+          navigate('/');
+
+          setTimeout(() => {
+            localStorage.setItem('clientToken', null);
+          }, 10);
+        
+        }}>
+          Logout
+      </Logout>
       
     </ContentHeader>
   );

@@ -33,9 +33,10 @@ const OutletWrapper = styled.div`
 
 // eslint-disable-next-line no-unused-vars
 const PrivateLayout = observer(({ store }) => {
+  console.log(store);
 
   return (
-    localStorage.getItem('clientToken') !== 'null' 
+    store.token !== 'null' 
       ? 
       <LayoutWrapper>
 

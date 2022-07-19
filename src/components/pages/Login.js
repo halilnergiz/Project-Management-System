@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import loginLogo from '../../assets/login-logo.png';
 import { useForm } from 'react-hook-form';
@@ -14,6 +14,7 @@ import {Title, RequestMessage } from '../UI/atoms/Texts';
 import {Submit, NavButton } from '../UI/atoms/Buttons.js';
 import 'babel-polyfill';
 import Input from '../templates/form-input/Input';
+import interceptors from '../../axios_config';
 
 /* Login Form Style */
 const LoginContent = styled.div`
@@ -69,12 +70,16 @@ export const schema = yup.object({
   password: yup.string().min(8).max(25).required()
 }).required();
 
+
+console.log(localStorage);
+
 // Login Component 
 const Login = observer(({ store }) => {
 
-  const API_URL = process.env.API_URL;
-
+  // console.log(store);
+  
   const navigate = useNavigate();
+
   // yup & useForm integration
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
@@ -83,26 +88,24 @@ const Login = observer(({ store }) => {
   // login request - authentication
   const Authentication = async (user) => {
 
-    await axios.post(`${API_URL}/auth/login`, {
+    interceptors();
+
+    await axios.post('/auth/login', {
       email: user.email,
       password: user.password
-    })
+    }) 
       .then(res => {
-        console.log(res);
-        if (res.status == 200) {
-          const clientToken = res.data.data.token;
-          localStorage.setItem('clientToken', clientToken);
-          store.loginInfMessage = '';
-          navigate('/dashboard');
-        }
+        store.token = localStorage.getItem('clientToken');
+        store.loginInfMessage = '';
+        navigate('/dashboard');
       })
       .catch(err => {
         store.loginInfMessage = err.response.data.message + ' !';
-        localStorage.setItem('clientToken', null);
       });
   };
 
-  return (
+  return(
+    // store.token == 'null' ? 
     <LoginContent>
       <LoginFormContent>
         <FormLogin onSubmit={handleSubmit(Authentication)} autoComplete={'off'}>
@@ -110,19 +113,20 @@ const Login = observer(({ store }) => {
           <Input {...register('email')} errorMessage={errors.email?.message} labelName={'email'} />
           <Input {...register('password')} errorMessage={errors.password?.message} inputType='password' labelName={'password'} />
           <Submit type='submit' />
-
+  
           <RequestMessage> {store.loginInfMessage}</RequestMessage>
         </FormLogin>
-
+  
         <NavButton to={'/register'} onClick={() => store.registerInfMessage = ''}>Register Now</NavButton>
-
+  
       </LoginFormContent>
-
+  
       <LogoSide>
         <Logo />
       </LogoSide>
-
+  
     </LoginContent>
+  // : navigate('/dashboard')
   );
 });
 

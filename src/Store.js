@@ -21,6 +21,9 @@ class Store {
 
   // type of information message - determine the message color 
   typeOfMessage;
+
+  // client token
+  token = localStorage.getItem('clientToken');
 }
 
 const store = new Store;

@@ -25,10 +25,10 @@ const AppWrapper = styled.div`
   padding: 0;
 `;
 
-
 const App = observer(({store}) => {
+
   const routing = useRoutes(routes);
-  
+
   return (
     <ThemeProvider theme={store.theme} >
       <AppWrapper>
