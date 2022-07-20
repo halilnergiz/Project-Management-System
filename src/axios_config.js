@@ -2,6 +2,17 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
+
+const toastProperty = {
+  position: 'top-left',
+  autoClose: 3000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: false,
+  progress: undefined,
+};
+
 axios.defaults.baseURL = `${process.env.API_URL}`;
 
 axios.interceptors.request.use(
@@ -17,55 +28,25 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (response) => {
     console.log(response);
+    
     const clientToken = response.data.data.token;
     localStorage.setItem('clientToken', clientToken);
     if(response.status == 200) {
-      toast.loading('Loading Your Datas'),{
-        position: 'top-left',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-      };
+      toast.loading('Loading Your Datas'),toastProperty;
     }
     if(response.status == 201) {
-      toast.info(response.statusText),{
-        position: 'top-left',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-      };
+      toast.info(response.statusText),toastProperty;
     }
     return response;
   }, (error) => {
     console.log(error);
+
     if (error.response.status == 401) {
       localStorage.setItem('clientToken', null);
-      toast.error(error.response.data.message),{
-        position: 'top-left',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-      };
+      toast.error(error.response.data.message),toastProperty;
     }
     if(error.response.status == 409) {
-      toast.error(error.response.data.message),{
-        position: 'top-left',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-      };
+      toast.error(error.response.data.message),toastProperty;
     }
     return Promise.reject(error);
   }
