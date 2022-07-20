@@ -1,9 +1,11 @@
 export const darkTheme = {
   bgColor: '#161616',
-  textColor: 'white'
+  textColor: 'white',
+  iconColor: 'white'
 };
 
 export const lightTheme = {
   bgColor: 'white',
-  textColor: 'black'
+  textColor: 'black',
+  iconColor: 'black'
 };
