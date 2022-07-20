@@ -41,7 +41,7 @@ const AppWrapper = styled.div`
   padding: 0;
 `;
 
-const App = observer(({store}) => {
+const App = observer(({ store }) => {
 
   const routing = useRoutes(routes);
   return (

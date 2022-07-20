@@ -75,7 +75,7 @@ const schema = yup.object({
 }).required();
 
 // Register Component
-const Register = observer(({ store }) => {
+const Register = observer(() => {
 
   const navigate = useNavigate();
 
@@ -106,15 +106,15 @@ const Register = observer(({ store }) => {
 
   return (
     <RegisterContent>
-      <ToastContainer/>
-      <RegisterLogoSide>
 
+      <ToastContainer/>
+
+      <RegisterLogoSide>
         <Logo />
         <İcon className="fa-xl fa-solid fa-diagram-project"></İcon>
         <h2>Bize Katıl</h2>
         <h2>Geleceğe Adım At</h2>
         <h3>Projelerini adım adım takip et, kısa sürede çok iş başar!</h3>
-
       </RegisterLogoSide>
 
       <RegisterFormContent>
@@ -129,7 +129,7 @@ const Register = observer(({ store }) => {
 
         </FormRegister>
 
-        <NavButton to={'/'} onClick={() => store.loginInfMessage = ''}>Back To Login</NavButton>
+        <NavButton to={'/'}>Back To Login</NavButton>
 
       </RegisterFormContent>
     </RegisterContent >

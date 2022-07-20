@@ -14,8 +14,7 @@ import { Form } from '../UI/atoms/Form.js';
 import {Title } from '../UI/atoms/Texts';
 import {Submit, NavButton } from '../UI/atoms/Buttons.js';
 import Input from '../templates/form-input/Input';
-import Notification from '../templates/notification/Notification';
-import { cssTransition, toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 // import { toast } from 'react-toastify';
 
 /* Login Form Style */
@@ -103,17 +102,15 @@ const Login = observer(({ store }) => {
       })
       .catch(err => {
         console.log(err);
-        // store.loginInfMessage = err.data.message + ' !';
         return err;
       });
   };
 
   return(
     <LoginContent>
-      <ToastContainer
-        color= 'green'
-        background= 'green'
-      />
+
+      <ToastContainer/>
+
       <LoginFormContent>
         <FormLogin onSubmit={handleSubmit(Authentication)} autoComplete={'off'}>
           <Title>Login</Title>
@@ -123,7 +120,7 @@ const Login = observer(({ store }) => {
           {/* <Notification store={store}/> */}
         </FormLogin>
 
-        <NavButton to={'/register'} onClick={() => store.registerInfMessage = ''}>Register Now</NavButton>
+        <NavButton to={'/register'}>Register Now</NavButton>
       </LoginFormContent>
 
       <LogoSide>

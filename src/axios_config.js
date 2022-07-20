@@ -1,17 +1,7 @@
 /* eslint-disable linebreak-style */
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
-
-const toastProperty = {
-  position: 'top-left',
-  autoClose: 3000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: false,
-  progress: undefined,
-};
+import { toastProperty } from './components/templates/notification/Notification';
 
 axios.defaults.baseURL = `${process.env.API_URL}`;
 
