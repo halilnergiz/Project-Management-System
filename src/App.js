@@ -4,8 +4,24 @@ import { useRoutes } from 'react-router';
 import { createGlobalStyle } from 'styled-components';
 import routes from './Routes';
 import { observer } from 'mobx-react';
+import './axios_config';
 
 const GlobalStyle = createGlobalStyle`
+:root{
+  .Toastify__toast--default  {
+    --toastify-spinner-color: green;
+    --toastify-color-info: green;
+    --toastify-icon-color-info: green;
+    --toastify-text-color-info: green;
+
+ }
+   .Toastify__toast--info {
+    --toastify-color-info: green;
+    --toastify-icon-color-info: green;
+    --toastify-text-color-info: green;
+    --toastify-color-progress-info: green;
+ }
+}
  html {
   height: 100%;
   margin: 0;
@@ -28,7 +44,6 @@ const AppWrapper = styled.div`
 const App = observer(({store}) => {
 
   const routing = useRoutes(routes);
-
   return (
     <ThemeProvider theme={store.theme} >
       <AppWrapper>

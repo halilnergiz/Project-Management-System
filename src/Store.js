@@ -14,14 +14,7 @@ class Store {
 
   // theme
   theme = darkTheme;
-
-  // login - register error messages  
-  registerInfMessage;
-  loginInfMessage;
-
-  // type of information message - determine the message color 
-  typeOfMessage;
-
+  
   // client token
   token = localStorage.getItem('clientToken');
 }

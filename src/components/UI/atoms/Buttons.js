@@ -19,7 +19,7 @@ export const NavButton = styled(Link)`
     border-radius: 3px;
     text-decoration: none;
     color: black;
-
+    
     cursor: pointer;
     background-color: #EE8C3A;
 `;

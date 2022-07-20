@@ -9,10 +9,10 @@ import { observer } from 'mobx-react';
 import loginLogo from '../../assets/login-logo.png';
 import Input from '../templates/form-input/Input';
 import { Form } from '../UI/atoms/Form.js';
-import { Title, RequestMessage } from '../UI/atoms/Texts.js';
+import { Title } from '../UI/atoms/Texts.js';
 import { Submit, NavButton } from '../UI/atoms/Buttons.js';
 import { useNavigate } from 'react-router';
-import interceptors from '../../axios_config';
+import { ToastContainer } from 'react-toastify';
 
 /* Register Form Style */
 const RegisterContent = styled.div`
@@ -87,31 +87,26 @@ const Register = observer(({ store }) => {
   // register request
   const checkRegister = async (data) => {
 
-    interceptors();
-
     await axios.post('/auth/register', {
       email: data.email,
       name: data.name,
       password: data.password
     })
-      .then((res) => {
-        store.registerInfMessage = res.statusText;
-        store.typeOfMessage = true;
-
+      .then((res) => {        
         setTimeout(() => {
           navigate('/');
           window.alert('Please Login');
         }, 500);
-        
+        return res;
       })
       .catch(err => {
-        store.typeOfMessage = false;
-        store.registerInfMessage = err.response.data.message;
+        return err;
       });
   };
 
   return (
     <RegisterContent>
+      <ToastContainer/>
       <RegisterLogoSide>
 
         <Logo />
@@ -132,7 +127,6 @@ const Register = observer(({ store }) => {
           <Input {...register('password')} errorMessage={errors.password?.message} inputType='password' labelName={'password'} />
           <Submit type="submit" value='Register' />
 
-          <RequestMessage successMessage = {store.typeOfMessage}>{store.registerInfMessage}</RequestMessage>
         </FormRegister>
 
         <NavButton to={'/'} onClick={() => store.loginInfMessage = ''}>Back To Login</NavButton>

@@ -5,6 +5,7 @@ import Sidebar from '../templates/layout/SideBar/SideBar';
 import Header from '../templates/layout/Header';
 import Unauthorized from './Unauthorized';
 import { observer } from 'mobx-react-lite';
+// import Notification from '../templates/notification/Notification';
 
 const LayoutWrapper = styled.div`
     height: 100%; 
@@ -51,6 +52,7 @@ const PrivateLayout = observer(({ store }) => {
           }}>
             change theme
           </ChangeTheme> */}
+          {/* <Notification store={store}/> */}
 
           <OutletWrapper>
             <Outlet />

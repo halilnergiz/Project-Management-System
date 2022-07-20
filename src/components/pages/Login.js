@@ -1,20 +1,22 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import loginLogo from '../../assets/login-logo.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react';
+import 'babel-polyfill';
+import loginLogo from '../../assets/login-logo.png';
 import axios from 'axios';
 
 import { Form } from '../UI/atoms/Form.js';
-import {Title, RequestMessage } from '../UI/atoms/Texts';
+import {Title } from '../UI/atoms/Texts';
 import {Submit, NavButton } from '../UI/atoms/Buttons.js';
-import 'babel-polyfill';
 import Input from '../templates/form-input/Input';
-import interceptors from '../../axios_config';
+import Notification from '../templates/notification/Notification';
+import { cssTransition, toast, ToastContainer } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 /* Login Form Style */
 const LoginContent = styled.div`
@@ -77,7 +79,8 @@ console.log(localStorage);
 const Login = observer(({ store }) => {
 
   // console.log(store);
-  
+ 
+  // console.log(process);
   const navigate = useNavigate();
 
   // yup & useForm integration
@@ -85,10 +88,9 @@ const Login = observer(({ store }) => {
     resolver: yupResolver(schema)
   });
 
+
   // login request - authentication
   const Authentication = async (user) => {
-
-    interceptors();
 
     await axios.post('/auth/login', {
       email: user.email,
@@ -96,37 +98,39 @@ const Login = observer(({ store }) => {
     }) 
       .then(res => {
         store.token = localStorage.getItem('clientToken');
-        store.loginInfMessage = '';
         navigate('/dashboard');
+        return res;
       })
       .catch(err => {
-        store.loginInfMessage = err.response.data.message + ' !';
+        console.log(err);
+        // store.loginInfMessage = err.data.message + ' !';
+        return err;
       });
   };
 
   return(
-    // store.token == 'null' ? 
     <LoginContent>
+      <ToastContainer
+        color= 'green'
+        background= 'green'
+      />
       <LoginFormContent>
         <FormLogin onSubmit={handleSubmit(Authentication)} autoComplete={'off'}>
           <Title>Login</Title>
-          <Input {...register('email')} errorMessage={errors.email?.message} labelName={'email'} />
+          <Input {...register('email')} errorMessage={errors.email?.message} labelName={'email'} title={'submit'} />
           <Input {...register('password')} errorMessage={errors.password?.message} inputType='password' labelName={'password'} />
           <Submit type='submit' />
-  
-          <RequestMessage> {store.loginInfMessage}</RequestMessage>
+          {/* <Notification store={store}/> */}
         </FormLogin>
-  
+
         <NavButton to={'/register'} onClick={() => store.registerInfMessage = ''}>Register Now</NavButton>
-  
       </LoginFormContent>
-  
+
       <LogoSide>
         <Logo />
       </LogoSide>
   
     </LoginContent>
-  // : navigate('/dashboard')
   );
 });
 

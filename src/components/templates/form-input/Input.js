@@ -15,7 +15,7 @@ const Input = React.forwardRef(({ name, onBlur, onChange, errorMessage, labelNam
     <>
       <TextLabel>{`${labelName}`}</TextLabel>
       <TextInput name={name} onBlur={onBlur} onChange={onChange} ref={ref} type={inputType}/>
-      <ErrorMessage >{errorMessage}</ErrorMessage>
+      <ErrorMessage>{errorMessage}</ErrorMessage>
     </>
   );
 });

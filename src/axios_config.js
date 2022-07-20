@@ -1,40 +1,72 @@
 /* eslint-disable linebreak-style */
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
-function interceptors() {
+axios.defaults.baseURL = `${process.env.API_URL}`;
 
-  const API_URL = process.env.API_URL;
-  axios.defaults.baseURL = `${API_URL}`;
+axios.interceptors.request.use(
+  (request) => {
+    console.log(request);
+    return request;
+  }, (error) => {
+    console.log(error);
+    return Promise.reject(error);
+  }
+);
 
-  axios.interceptors.request.use(
-    (request) => {
-      console.log(request);
-      return request;
-    }, (error) => {
-      console.log(error);
-      return Promise.reject(error);
+axios.interceptors.response.use(
+  (response) => {
+    console.log(response);
+    const clientToken = response.data.data.token;
+    localStorage.setItem('clientToken', clientToken);
+    if(response.status == 200) {
+      toast.loading('Loading Your Datas'),{
+        position: 'top-left',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+      };
     }
-  );
-
-  axios.interceptors.response.use(
-    (response) => {
-      console.log(response);
-      const clientToken = response.data.data.token;
-      localStorage.setItem('clientToken', clientToken);
-      console.log(response);
-      
-      return response;
-    }, (error) => {
-      console.log(error);
-      if (error.response.status == 401) {
-        localStorage.setItem('clientToken', null);
-      }
-      if(error.response.status == 409) {
-        window.alert('Bu email kullanılıyor. Giriş yapmak için Login sayfasına gidin');
-      }
-      return Promise.reject(error);
+    if(response.status == 201) {
+      toast.info(response.statusText),{
+        position: 'top-left',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+      };
     }
-  );
-}
-
-export default interceptors;
+    return response;
+  }, (error) => {
+    console.log(error);
+    if (error.response.status == 401) {
+      localStorage.setItem('clientToken', null);
+      toast.error(error.response.data.message),{
+        position: 'top-left',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+      };
+    }
+    if(error.response.status == 409) {
+      toast.error(error.response.data.message),{
+        position: 'top-left',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+      };
+    }
+    return Promise.reject(error);
+  }
+);
