@@ -5,7 +5,8 @@ import Sidebar from '../templates/layout/SideBar/SideBar';
 import Header from '../templates/layout/Header';
 import Unauthorized from './Unauthorized';
 import { observer } from 'mobx-react-lite';
-// import Notification from '../templates/notification/Notification';
+import { lightTheme, darkTheme } from '../UI/Theme';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 const LayoutWrapper = styled.div`
     height: 100%; 
@@ -28,9 +29,18 @@ const OutletWrapper = styled.div`
   margin-right: 1rem;
 `;
 
-// const ChangeTheme = styled.button`
-// cursor: pointer;
-// `;
+const ChangeTheme = styled.button`
+cursor: pointer;
+background-color: transparent;
+border: none;
+transition: .1s;
+:active{
+  transform: rotate(90deg);
+  /* color: white; */
+}
+`;
+
+
 
 // eslint-disable-next-line no-unused-vars
 const PrivateLayout = observer(({ store }) => {
@@ -47,12 +57,12 @@ const PrivateLayout = observer(({ store }) => {
           <Header />
 
           {/* Change Theme Code */}
-          {/* <ChangeTheme onClick={() => {
+          <ChangeTheme onClick={() => {
             JSON.stringify(store.theme) == JSON.stringify(darkTheme) ? store.theme = lightTheme : store.theme = darkTheme;
           }}>
-            change theme
-          </ChangeTheme> */}
-          {/* <Notification store={store}/> */}
+            <DarkModeIcon sx={{ fontSize: 30 }} >Change</DarkModeIcon>
+          </ChangeTheme>
+         
 
           <OutletWrapper>
             <Outlet />
