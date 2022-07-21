@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { observer } from 'mobx-react';
+import Swal from 'sweetalert2';
 
 import loginLogo from '../../assets/login-logo.png';
 import Input from '../templates/form-input/Input';
@@ -12,7 +13,6 @@ import { Form } from '../UI/atoms/Form.js';
 import { Title } from '../UI/atoms/Texts.js';
 import { Submit, NavButton } from '../UI/atoms/Buttons.js';
 import { useNavigate } from 'react-router';
-import { ToastContainer } from 'react-toastify';
 
 /* Register Form Style */
 const RegisterContent = styled.div`
@@ -92,15 +92,16 @@ const Register = observer(() => {
       name: data.name,
       password: data.password
     })
-      .then((res) => {        
+      .then(() => {        
         setTimeout(() => {
           navigate('/');
-          window.alert('Please Login');
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: 'Please Login',
+            showConfirmButton: true,
+          });
         }, 500);
-        return res;
-      })
-      .catch(err => {
-        return err;
       });
   };
 

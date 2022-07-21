@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { toastProperty } from './components/templates/notification/Notification';
@@ -11,7 +10,10 @@ axios.interceptors.request.use(
   (request) => {
     toastId = toast.loading('Loading...');
     console.log(request);
-  }, 
+    return request;
+  }, (error) => {
+    return Promise.reject(error);
+  }
 );
 
 axios.interceptors.response.use(
@@ -40,10 +42,3 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-
-// toast.promise(Authenticaton,  {
-//   pending: 'pending',
-//   success: 'promise is loaded',
-//   error: 'error'
-// });

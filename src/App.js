@@ -34,7 +34,7 @@ const App = observer(({ store }) => {
   return (
     <ThemeProvider theme={store.theme} >
       <AppWrapper>
-        <ToastContainer/>
+        <ToastContainer />
         <GlobalStyle />
         {routing}
       </AppWrapper>
