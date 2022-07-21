@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -9,13 +9,11 @@ import { observer } from 'mobx-react';
 import 'babel-polyfill';
 import loginLogo from '../../assets/login-logo.png';
 import axios from 'axios';
-
+import {toast} from 'react-toastify';
 import { Form } from '../UI/atoms/Form.js';
 import {Title } from '../UI/atoms/Texts';
 import {Submit, NavButton } from '../UI/atoms/Buttons.js';
 import Input from '../templates/form-input/Input';
-import { ToastContainer } from 'react-toastify';
-// import { toast } from 'react-toastify';
 
 /* Login Form Style */
 const LoginContent = styled.div`
@@ -77,9 +75,6 @@ console.log(localStorage);
 // Login Component 
 const Login = observer(({ store }) => {
 
-  // console.log(store);
- 
-  // console.log(process);
   const navigate = useNavigate();
 
   // yup & useForm integration
@@ -90,7 +85,7 @@ const Login = observer(({ store }) => {
 
   // login request - authentication
   const Authentication = async (user) => {
-
+  
     await axios.post('/auth/login', {
       email: user.email,
       password: user.password
@@ -106,10 +101,17 @@ const Login = observer(({ store }) => {
       });
   };
 
+  
+  // useEffect(()=>{
+  //   toast.promise(Authentication,  {
+  //     pending: 'loading',
+  //     success: 'promise is loaded',
+  //     error: 'error'
+  //   });
+  // }, []);
+
   return(
     <LoginContent>
-
-      <ToastContainer/>
 
       <LoginFormContent>
         <FormLogin onSubmit={handleSubmit(Authentication)} autoComplete={'off'}>

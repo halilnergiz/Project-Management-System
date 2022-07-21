@@ -5,23 +5,10 @@ import { createGlobalStyle } from 'styled-components';
 import routes from './Routes';
 import { observer } from 'mobx-react';
 import './axios_config';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const GlobalStyle = createGlobalStyle`
-:root{
-  .Toastify__toast--default  {
-    --toastify-spinner-color: green;
-    --toastify-color-info: green;
-    --toastify-icon-color-info: green;
-    --toastify-text-color-info: green;
-
- }
-   .Toastify__toast--info {
-    --toastify-color-info: green;
-    --toastify-icon-color-info: green;
-    --toastify-text-color-info: green;
-    --toastify-color-progress-info: green;
- }
-}
  html {
   height: 100%;
   margin: 0;
@@ -47,6 +34,7 @@ const App = observer(({ store }) => {
   return (
     <ThemeProvider theme={store.theme} >
       <AppWrapper>
+        <ToastContainer/>
         <GlobalStyle />
         {routing}
       </AppWrapper>

@@ -42,7 +42,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // export default Notification;
 
 export const toastProperty = {
-  position: 'top-left',
+  position: 'top-right',
   autoClose: 3000,
   hideProgressBar: false,
   closeOnClick: true,

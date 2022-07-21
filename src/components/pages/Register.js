@@ -107,8 +107,6 @@ const Register = observer(() => {
   return (
     <RegisterContent>
 
-      <ToastContainer/>
-
       <RegisterLogoSide>
         <Logo />
         <İcon className="fa-xl fa-solid fa-diagram-project"></İcon>

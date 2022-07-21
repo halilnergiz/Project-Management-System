@@ -6,7 +6,6 @@ import Header from '../templates/layout/Header';
 import Unauthorized from './Unauthorized';
 import { observer } from 'mobx-react-lite';
 
-
 const LayoutWrapper = styled.div`
     height: 100%; 
     margin: 0;
@@ -36,7 +35,6 @@ const PrivateLayout = observer(({ store }) => {
     store.token !== 'null' 
       ? 
       <LayoutWrapper>
-
         <Sidebar />
 
         <MainLayout>
