@@ -22,10 +22,6 @@ const NavBar = styled.ul`
   flex-direction: row;
 `;
 
-// const Item = styled.li`
-//   margin: 0 10px;
-// `;
-
 const Logout = styled(Link)`
     color: ${(props) => props.theme.textColor};
     text-decoration: none;

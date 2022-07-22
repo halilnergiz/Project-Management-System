@@ -2,9 +2,9 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import Sidebar from '../templates/layout/SideBar/SideBar';
-import Header from '../templates/layout/Header';
-import Unauthorized from './Unauthorized';
+import Sidebar from '../../templates/sub_components/SideBar/SideBar';
+import Header from '../../templates/sub_components/Header';
+import Unauthorized from '../Unauthorized';
 import { observer } from 'mobx-react-lite';
 
 const LayoutWrapper = styled.div`
@@ -29,7 +29,7 @@ const OutletWrapper = styled.div`
 `;
 
 // eslint-disable-next-line no-unused-vars
-const PrivateLayout = observer(({ store }) => {
+const Dashboard = observer(({ store }) => {
   console.log(store);
 
   return (
@@ -53,7 +53,7 @@ const PrivateLayout = observer(({ store }) => {
 
 });
 
-export default PrivateLayout;
+export default Dashboard;
 
 // outlet -> tıklandığında yansıtılacak componentleri temsil eder.
 // outlet'i nerede tanımlarsan yerine geçecek componentler de oraya yazdırılır.

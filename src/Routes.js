@@ -1,6 +1,6 @@
 import React from 'react';
 import store from './Store';
-import {Register, Login, Home, PrivateLayout, NoMatch, Unauthorized} from './components/pages';
+import {Register, Login, Home, Dashboard, NoMatch, Unauthorized} from './components/pages';
 
 // route schema 
 const routes = [
@@ -14,7 +14,7 @@ const routes = [
   },
   {
     path: '/dashboard',
-    element: <PrivateLayout store={store}/>,
+    element: <Dashboard store={store}/>,
     children: [
       { index: true, element: <Home /> }
     ],
