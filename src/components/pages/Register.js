@@ -10,9 +10,10 @@ import Swal from 'sweetalert2';
 import loginLogo from '../../assets/login-logo.png';
 import Input from '../templates/form-input/Input';
 import { Form } from '../UI/atoms/Form.js';
-import {TitleWhite } from '../UI/atoms/Texts.js';
+import {Title } from '../UI/atoms/Texts.js';
 import { Submit, NavButton } from '../UI/atoms/Buttons.js';
 import { useNavigate } from 'react-router';
+import { mainColors } from '../UI/staticStyle/staticStyle';
 
 /* Register Form Style */
 const RegisterContent = styled.div`
@@ -32,7 +33,7 @@ const RegisterFormContent = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color:#161616;
+    background-color:${mainColors.black};
     border-radius: 10% 0% 0% 10% / 40% 0% 0% 40% ;
     text-transform: capitalize;
 `;
@@ -120,7 +121,7 @@ const Register = observer(() => {
 
         <FormRegister onSubmit={handleSubmit(checkRegister)} autoComplete='off' >
 
-          <TitleWhite>Register</TitleWhite>
+          <Title>Register</Title>
           <Input {...register('name')} errorMessage={errors.name?.message} labelName='name' />
           <Input {...register('email')} errorMessage={errors.email?.message} labelName={'email'} />
           <Input {...register('password')} errorMessage={errors.password?.message} inputType='password' labelName={'password'} />

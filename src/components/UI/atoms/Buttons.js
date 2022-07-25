@@ -1,23 +1,20 @@
-import { Link, NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import { mainColors } from '../staticStyle/staticStyle';
 
 export const Submit = styled.input`
     border: none;
     outline: none;
     padding: 10px 30px;
-    border-radius: 3px;
+    border-radius: 5px;
 
     cursor: pointer;
     background-color: white;
-`;
 
-export const SubmitOrange = styled.input`
-    border: none;
-    outline: none;
-    padding: 10px 30px;
-    border-radius: 3px;
-    background-color: #EE8C3A;
-    cursor: pointer;
+    ${props => props.orange && css`
+    background-color: ${mainColors.orange};
+    margin-top: 1rem;
+    `}
 `;
 
 export const NavButton = styled(Link)`
@@ -30,18 +27,13 @@ export const NavButton = styled(Link)`
     color: black;
     
     cursor: pointer;
-    background-color: #EE8C3A;
-`;
+    background-color: ${mainColors.orange};
 
-export const NavBtnHeader = styled(NavLink)`
-    border: none;
-    outline: none;
-    border-radius: 3px;
-    text-decoration: none;
-    color: black;
-    vertical-align: top;
-    cursor: pointer;
-    background-color: white;
-    text-align: center;
-    margin-right: 1rem;
+    ${props => props.header_button && css`
+        text-align: center;
+        margin-right: 1rem;
+        width: 180px;
+        padding: 8px 8px 0px 0px;
+        margin-top: 0;
+    `}
 `;

@@ -10,9 +10,10 @@ import 'babel-polyfill';
 import loginLogo from '../../assets/login-logo.png';
 import axios from 'axios';
 import { Form } from '../UI/atoms/Form.js';
-import { TitleWhite } from '../UI/atoms/Texts';
+import { Title } from '../UI/atoms/Texts';
 import { Submit, NavButton } from '../UI/atoms/Buttons.js';
 import Input from '../templates/form-input/Input';
+import { mainColors } from '../UI/staticStyle/staticStyle';
 
 /* Login Form Style */
 const LoginContent = styled.div`
@@ -32,7 +33,7 @@ const LoginFormContent = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 0px 500px 0px 0px;
-    background-color: #161616;
+    background-color: ${mainColors.black};
 `;
 
 const FormLogin = styled(Form)`
@@ -97,7 +98,8 @@ const Login = observer(({ store }) => {
 
       <LoginFormContent>
         <FormLogin onSubmit={handleSubmit(Authentication)} autoComplete={'off'}>
-          <TitleWhite>Login</TitleWhite>
+          <Title>Login</Title>
+
           <Input {...register('email')} errorMessage={errors.email?.message} labelName={'email'} />
           <Input {...register('password')} errorMessage={errors.password?.message} inputType='password' labelName={'password'} />
           <Submit type='submit' />

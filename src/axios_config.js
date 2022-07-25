@@ -30,11 +30,12 @@ axios.interceptors.response.use(
     if(response.status == 201) {
       toast.success(response.statusText, toastProperty);
     }
+    console.log('proje eklendi 1');
     return response;
   }, (error) => {
     toast.dismiss(toastId);
     if (error.response.status == 401) {
-      // localStorage.setItem('clientToken', null);
+      localStorage.setItem('clientToken', null);
       toast.error(error.response.data.message, toastProperty);
     }
     if(error.response.status == 409) {

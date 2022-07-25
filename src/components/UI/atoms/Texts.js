@@ -1,10 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const TitleWhite = styled.h2`
+export const Title = styled.h2`
     color: white;
     user-select: none;
-`;
 
-export const TitleBlack = styled.h2`
-    user-select: none;
+    ${props => props.black && css`
+        user-select: none;
+        color: black;
+    `}
 `;

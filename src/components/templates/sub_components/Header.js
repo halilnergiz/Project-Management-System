@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { darkTheme, lightTheme } from '../../UI/Theme';
 import {observer} from 'mobx-react';
-import { NavBtnHeader } from '../../UI/atoms/Buttons';
+import { NavButton } from '../../UI/atoms/Buttons';
 
 const ContentHeader = styled.div`
     float: right;
@@ -47,7 +47,7 @@ color: white;
 transform: rotate(10deg);
 `;
 
-const DarkModeIcon2 = styled(DarkModeIcon)`
+const ChangeIcon = styled(DarkModeIcon)`
   font-size: 50px;
   color: ${(props) => props.theme.iconColor};
 `;
@@ -67,14 +67,14 @@ const Header = observer(({ store })  => {
 
       <HeaderTools>
 
-        <NavBtnHeader to={'create_new_project'} onClick={()=> {console.log('yes');}}>Create Project</NavBtnHeader >
+        <NavButton to={'create_new_project'} header_button="true" onClick={()=> {console.log('yes');}}>Create Project</NavButton >
       
-        <NavBtnHeader to={'create_new_subject'} onClick={()=> {console.log('yes');}}>Create Subject</NavBtnHeader >
+        <NavButton to={'create_new_subject'} header_button="true" onClick={()=> {console.log('yes');}}>Create Subject</NavButton >
 
         <ChangeTheme type={'checkbox'} onClick={() => {
           JSON.stringify(store.theme) == JSON.stringify(darkTheme) ? store.theme = lightTheme : store.theme = darkTheme;
         }}>
-          <DarkModeIcon2 />
+          <ChangeIcon />
         </ChangeTheme>
 
         <Logout to={'/'} onClick={

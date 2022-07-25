@@ -1,24 +1,30 @@
 import React from 'react';
-import Input from '../../../templates/form-input/Input';
-import { SubmitOrange } from '../../../UI/atoms/Buttons';
+import { Submit } from '../../../UI/atoms/Buttons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { Form } from '../../../UI/atoms/Form';
-import { TitleBlack } from '../../../UI/atoms/Texts';
+import { Title } from '../../../UI/atoms/Texts';
+import CreateInput from '../../../UI/molecules/CreateInput';
 
 const CreateSubjectContent = styled.div`
-    width: 30%;
+    width: 80%;
     position: relative;
     top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Work Sans', sans-serif;
+
 `;
 
 const CreateSubjectForm = styled(Form)`
-    background-color: #161616;
     padding: 1.5rem;
     border-radius: 5px;
+    width: 30%;
+
 `;
 
 // create subject yup schema 
@@ -47,12 +53,12 @@ const CreateSubject = () => {
   };
   return (
     <CreateSubjectContent>
-      <TitleBlack>Create New Subject</TitleBlack>
+      <Title black>Create New Subject</Title>
 
       <CreateSubjectForm onSubmit={handleSubmit(InsertSubject)} autoComplete={'off'}>
-        <Input {...register('title')} errorMessage={errors.title?.message} labelName='Title' />
-        <Input {...register('description')} errorMessage={errors.description?.message} labelName='Description' />
-        <SubmitOrange type='submit' value='Create'/>
+        <CreateInput {...register('title')} errorMessage={errors.title?.message} labelName='Title'/> <br/><br/><br/>
+        <CreateInput {...register('description')} errorMessage={errors.description?.message} labelName='Description' />
+        <Submit orange type='submit' value='Create'/>
       </CreateSubjectForm>
     </CreateSubjectContent>
   );
