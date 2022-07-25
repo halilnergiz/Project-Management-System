@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { darkTheme, lightTheme } from '../../UI/Theme';
+import {observer} from 'mobx-react';
+import { NavBtnHeader } from '../../UI/atoms/Buttons';
 
 const ContentHeader = styled.div`
     float: right;
@@ -56,7 +58,7 @@ const HeaderTools = styled.div`
   margin-right: 2%;
 `;
 
-const Header = ({ store }) => {
+const Header = observer(({ store })  => {
   const navigate = useNavigate();
   return (
     <ContentHeader>
@@ -64,6 +66,10 @@ const Header = ({ store }) => {
       <NavBar />
 
       <HeaderTools>
+
+        <NavBtnHeader to={'create_new_project'} onClick={()=> {console.log('yes');}}>Create Project</NavBtnHeader >
+      
+        <NavBtnHeader to={'create_new_subject'} onClick={()=> {console.log('yes');}}>Create Subject</NavBtnHeader >
 
         <ChangeTheme type={'checkbox'} onClick={() => {
           JSON.stringify(store.theme) == JSON.stringify(darkTheme) ? store.theme = lightTheme : store.theme = darkTheme;
@@ -88,6 +94,6 @@ const Header = ({ store }) => {
 
     </ContentHeader>
   );
-};
+});
 
 export default Header;

@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
@@ -9,6 +8,7 @@ import { observer } from 'mobx-react-lite';
 
 const LayoutWrapper = styled.div`
     height: 100%; 
+    width: 100%;
     margin: 0;
     padding: 0;
     display: flex;
@@ -17,39 +17,34 @@ const LayoutWrapper = styled.div`
 
 const MainLayout = styled.div`
   height: 100%;
-  width: 97%;
+  width: 100%;
+  overflow-y: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
-const OutletWrapper = styled.div`
-  border: 1px solid black;
-  float: right;
-  width: 90%;
-  margin-top: 1rem;
-  margin-right: 1rem;
-`;
-
-// eslint-disable-next-line no-unused-vars
 const Dashboard = observer(({ store }) => {
   console.log(store);
 
   return (
-    store.token !== 'null' 
-      ? 
+    store.token !== 'null'
+      ?
       <LayoutWrapper>
         <Sidebar />
 
         <MainLayout>
-          <Header store= {store} />
 
-          <OutletWrapper>
-            <Outlet />
-          </OutletWrapper>
+          <Header store={store} />
+
+          <Outlet />
+
         </MainLayout>
 
       </LayoutWrapper >
       :
       <Unauthorized />
-  ); 
+  );
 
 });
 

@@ -10,7 +10,7 @@ import 'babel-polyfill';
 import loginLogo from '../../assets/login-logo.png';
 import axios from 'axios';
 import { Form } from '../UI/atoms/Form.js';
-import { Title } from '../UI/atoms/Texts';
+import { TitleWhite } from '../UI/atoms/Texts';
 import { Submit, NavButton } from '../UI/atoms/Buttons.js';
 import Input from '../templates/form-input/Input';
 
@@ -63,7 +63,7 @@ Logo.defaultProps = {
 };
 
 /* yup Register schema */
-export const schema = yup.object({
+const schema = yup.object({
   email: yup.string().email().max(50).required(),
   password: yup.string().min(8).max(25).required()
 }).required();
@@ -97,11 +97,10 @@ const Login = observer(({ store }) => {
 
       <LoginFormContent>
         <FormLogin onSubmit={handleSubmit(Authentication)} autoComplete={'off'}>
-          <Title>Login</Title>
-          <Input {...register('email')} errorMessage={errors.email?.message} labelName={'email'} title={'submit'} />
+          <TitleWhite>Login</TitleWhite>
+          <Input {...register('email')} errorMessage={errors.email?.message} labelName={'email'} />
           <Input {...register('password')} errorMessage={errors.password?.message} inputType='password' labelName={'password'} />
           <Submit type='submit' />
-          {/* <Notification store={store}/> */}
         </FormLogin>
 
         <NavButton to={'/register'}>Register Now</NavButton>

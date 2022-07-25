@@ -9,7 +9,10 @@ let toastId;
 axios.interceptors.request.use(
   (request) => {
     toastId = toast.loading('Loading...');
-    console.log(request);
+    request.headers = {
+      'Authorization' : `Bearer ${localStorage.getItem('clientToken')}`,
+      'Content-Type': 'application/json',
+    };
     return request;
   }, (error) => {
     return Promise.reject(error);
@@ -18,7 +21,6 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   (response) => {
-    console.log(response);
     toast.dismiss(toastId);
     const clientToken = response.data.data.token;
     localStorage.setItem('clientToken', clientToken);
@@ -30,10 +32,9 @@ axios.interceptors.response.use(
     }
     return response;
   }, (error) => {
-    console.log(error);
     toast.dismiss(toastId);
     if (error.response.status == 401) {
-      localStorage.setItem('clientToken', null);
+      // localStorage.setItem('clientToken', null);
       toast.error(error.response.data.message, toastProperty);
     }
     if(error.response.status == 409) {

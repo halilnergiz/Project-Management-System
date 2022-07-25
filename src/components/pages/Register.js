@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 import loginLogo from '../../assets/login-logo.png';
 import Input from '../templates/form-input/Input';
 import { Form } from '../UI/atoms/Form.js';
-import { Title } from '../UI/atoms/Texts.js';
+import {TitleWhite } from '../UI/atoms/Texts.js';
 import { Submit, NavButton } from '../UI/atoms/Buttons.js';
 import { useNavigate } from 'react-router';
 
@@ -120,7 +120,7 @@ const Register = observer(() => {
 
         <FormRegister onSubmit={handleSubmit(checkRegister)} autoComplete='off' >
 
-          <Title>Register</Title>
+          <TitleWhite>Register</TitleWhite>
           <Input {...register('name')} errorMessage={errors.name?.message} labelName='name' />
           <Input {...register('email')} errorMessage={errors.email?.message} labelName={'email'} />
           <Input {...register('password')} errorMessage={errors.password?.message} inputType='password' labelName={'password'} />

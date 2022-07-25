@@ -11,19 +11,23 @@ import 'react-toastify/dist/ReactToastify.css';
 const GlobalStyle = createGlobalStyle`
  html {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
  }
 
  body, #root {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
  }
 `;
 
 const AppWrapper = styled.div`
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
 `;
