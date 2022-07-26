@@ -23,12 +23,10 @@ const routes = [
         element: <CreateProject store={store} /> 
       },
       {
-        index: true,
         path: 'create_new_project',
         element: <Home />
       },
       {
-        index: true,
         path: 'create_new_subject',
         element: <CreateSubject />
       }

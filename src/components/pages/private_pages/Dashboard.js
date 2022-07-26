@@ -50,5 +50,3 @@ const Dashboard = observer(({ store }) => {
 
 export default Dashboard;
 
-// outlet -> tıklandığında yansıtılacak componentleri temsil eder.
-// outlet'i nerede tanımlarsan yerine geçecek componentler de oraya yazdırılır.
