@@ -37,15 +37,18 @@ const SidebarItem = styled.div`
     cursor: pointer;
     transition: transform 0.3s;
   }
+
   .sidebar-item.open > .sidebar-title .toggle-btn {
     transform: rotate(180deg);
   }
+
   .sidebar-content {
     padding-top: 0.25em;
     height: 0;
     overflow: hidden;
     display: none;
   }
+
   .sidebar-item.open > .sidebar-content {
     height: auto;
     display: block;
@@ -57,19 +60,16 @@ const SidebarItem = styled.div`
     text-decoration: none;
     margin-left: .75em;
     width: max-content;
-  
   }
   .sidebar-item.plain:hover {
     text-decoration: underline;
   }
-
 `;
 
-
-const SidebarItems = ({ item }) => {
+const SidebarItems = ({item}) => {
   const [open, setOpen] = useState(false);
 
-  if (item.childrens) {
+  if (item.subjects) {
     return (
       <SidebarItem>
         <div className={open ? 'sidebar-item open' : 'sidebar-item'}>
@@ -80,7 +80,7 @@ const SidebarItems = ({ item }) => {
             </span>
           </div>
           <div className="sidebar-content">
-            {item.childrens.map((child, index) => <SidebarItems key={index} item={child} />)}
+            {item.subjects.map((subject, index) => <SidebarItems key={index} item={subject} />)}
           </div>
         </div>
       </SidebarItem>
@@ -88,7 +88,7 @@ const SidebarItems = ({ item }) => {
   } else {
     return (
       <Link to={item.path || '#'} className="sidebar-item plain">
-        {item.title}
+        {item.title} 
       </Link>
     );
   }

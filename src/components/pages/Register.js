@@ -93,7 +93,8 @@ const Register = observer(() => {
       name: data.name,
       password: data.password
     })
-      .then(() => {        
+      .then((res) => {        
+        console.log(res);
         setTimeout(() => {
           navigate('/');
           Swal.fire({

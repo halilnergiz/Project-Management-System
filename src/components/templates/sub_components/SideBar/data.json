@@ -1,46 +1,40 @@
 [
     {
-        "title": "Projects",
-        "path": "/projects",
-        "childrens": [
+        "title": "XferData",
+        "subjects": [
             {
-                "title": "XferData",
-                "childrens": [
+                "title": "XferDataRepo",
+                "subjects": [
                     {
-                        "title": "XferDataRepo",
-                        "childrens": [
-                            {
-                                "title": "Payment"
-                            },
-                            {
-                                "title": "Data Service"
-                            },
-                            {
-                                "title": "Logger Service"
-                            }
-                        ]
+                        "title": "Payment"
+                    },
+                    {
+                        "title": "Data Service"
+                    },
+                    {
+                        "title": "Logger Service"
                     }
                 ]
+            }
+        ]
+    },
+    {
+        "title": "MultiRepo Project",
+        "subjects": [
+            {
+                "title": "microservice-1",
+                "path": "/mc-1"
             },
             {
-                "title": "MultiRepo Project",
-                "childrens": [
-                    {
-                        "title": "microservice-1",
-                        "path": "/mc-1"
-                    },
-                    {
-                        "title": "microservice-2",
-                        "path": "/mc-2"
-                    },
-                    {
-                        "title": "microservice-3",
-                        "path": "/mc-3"
-                    },
-                    {
-                        "title": "Front-End"
-                    }
-                ]
+                "title": "microservice-2",
+                "path": "/mc-2"
+            },
+            {
+                "title": "microservice-3",
+                "path": "/mc-3"
+            },
+            {
+                "title": "Front-End"
             }
         ]
     }

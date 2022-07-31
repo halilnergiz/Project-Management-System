@@ -1,8 +1,10 @@
 import SidebarItems from './SidebarItems';
-import items from './data.json';
+// import sidebarDatas from './data.json';
 import styled from 'styled-components';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '../../../../assets/logo.png';
+import { useNavigate } from 'react-router';
+import axios from 'axios';
 
 const SidebarContent = styled.div`
     width:min-content;
@@ -15,28 +17,37 @@ const SidebarContent = styled.div`
 
 const Logo = styled.img`
     width: 140px;
-    height: 120px;
-    position: relative;
-    top: -2rem;
+    height: 40px;
+    margin-top: .5rem;
+    cursor: pointer;
 `;
 
-const SidebarText = styled.div`
-  position: relative;
-  margin-top: -3rem;
-`;
+const SidebarText = styled.div``;
 
+const SideBar = (() => {
 
-const SideBar = () => {
+  const navigate = useNavigate();
+  const [userProjects, setProjects] = useState([]);
 
+  useEffect(() => {
+    axios.get('/project/sidenav-options')
+      .then((res) => {
+        const response = res.data.data;
+        setProjects(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <SidebarContent>
-      <Logo src={`${logo}`} />
+      <Logo src={`${logo}`} onClick={() => { navigate('/dashboard'); }} />
       <SidebarText>
-        {items.map((item, index) => <SidebarItems key={index} item={item} />)}
+        {userProjects.map((item, index) => <SidebarItems key={index} item={item} />)}
       </SidebarText>
     </SidebarContent>
   );
-};
+});
 
 export default SideBar;

@@ -37,7 +37,7 @@ const schema = yup.object({
   title: yup.string().min(3).max(25).required()
 }).required();
 
-const CreateProject = observer(() => {
+const CreateProject = observer(({store}) => {
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
@@ -50,11 +50,6 @@ const CreateProject = observer(() => {
     })
       .then((res) => {
         console.log(res);
-        console.log(project);
-        console.log('proje eklendi 2');
-      })
-      .catch(()=> {
-        console.log(localStorage.getItem('clientToken'));
       });
   };
 

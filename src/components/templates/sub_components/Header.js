@@ -62,14 +62,14 @@ const Header = observer(({ store })  => {
   const navigate = useNavigate();
   return (
     <ContentHeader>
-      
+
       <NavBar />
 
       <HeaderTools>
 
-        <NavButton to={'create_new_project'} header_button="true" onClick={()=> {console.log('yes');}}>Create Project</NavButton >
-      
-        <NavButton to={'create_new_subject'} header_button="true" onClick={()=> {console.log('yes');}}>Create Subject</NavButton >
+        <NavButton to={'create_new_project'} header_button="true"> Create Project </NavButton >
+
+        <NavButton to={'create_new_subject'} header_button="true"> Create Subject </NavButton >
 
         <ChangeTheme type={'checkbox'} onClick={() => {
           JSON.stringify(store.theme) == JSON.stringify(darkTheme) ? store.theme = lightTheme : store.theme = darkTheme;
@@ -79,13 +79,10 @@ const Header = observer(({ store })  => {
 
         <Logout to={'/'} onClick={
           () => {
-
             navigate('/');
-
             setTimeout(() => {
               localStorage.setItem('clientToken', null);
             }, 10);
-
           }}>
           Logout
         </Logout>

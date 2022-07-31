@@ -20,11 +20,11 @@ const routes = [
     children: [
       {
         index: true,
-        element: <CreateProject store={store} /> 
+        element: <Home />
       },
       {
         path: 'create_new_project',
-        element: <Home />
+        element: <CreateProject store={store} /> 
       },
       {
         path: 'create_new_subject',

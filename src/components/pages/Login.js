@@ -87,15 +87,20 @@ const Login = observer(({ store }) => {
       email: user.email,
       password: user.password
     })
-      .then( () => {
+      .then( (response) => {
+        console.log(response);
+        const clientToken = response.data.data.token;
+        localStorage.setItem('clientToken', clientToken);
+        store.id = response.data.data.id;
         store.token = localStorage.getItem('clientToken');
         navigate('/dashboard');
       });
+      
   };
 
   return (
     <LoginContent>
-
+      
       <LoginFormContent>
         <FormLogin onSubmit={handleSubmit(Authentication)} autoComplete={'off'}>
           <Title>Login</Title>

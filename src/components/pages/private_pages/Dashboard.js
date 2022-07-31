@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Sidebar from '../../templates/sub_components/SideBar/SideBar';
 import Header from '../../templates/sub_components/Header';
 import Unauthorized from '../Unauthorized';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 
 const LayoutWrapper = styled.div`
     height: 100%; 
@@ -25,14 +25,12 @@ const MainLayout = styled.div`
 `;
 
 const Dashboard = observer(({ store }) => {
-  console.log(store);
 
   return (
     store.token !== 'null'
       ?
       <LayoutWrapper>
         <Sidebar />
-
         <MainLayout>
 
           <Header store={store} />

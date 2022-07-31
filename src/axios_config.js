@@ -22,15 +22,12 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (response) => {
     toast.dismiss(toastId);
-    const clientToken = response.data.data.token;
-    localStorage.setItem('clientToken', clientToken);
     if(response.status == 200) {
       toast.success('Successful Login', toastProperty);
     }
     if(response.status == 201) {
       toast.success(response.statusText, toastProperty);
     }
-    console.log('proje eklendi 1');
     return response;
   }, (error) => {
     toast.dismiss(toastId);
