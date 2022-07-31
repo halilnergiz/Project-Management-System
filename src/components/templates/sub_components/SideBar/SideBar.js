@@ -29,7 +29,7 @@ const SideBar = (() => {
   const navigate = useNavigate();
   const [userProjects, setProjects] = useState([]);
 
-  useEffect(() => {
+  const getProjects = () => {
     axios.get('/project/sidenav-options')
       .then((res) => {
         const response = res.data.data;
@@ -38,6 +38,10 @@ const SideBar = (() => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  useEffect(() => {
+    getProjects();
   }, []);
 
   return (

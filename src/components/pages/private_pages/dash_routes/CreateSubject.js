@@ -42,12 +42,12 @@ const CreateSubject = () => {
     await axios.post('/subject', {
       description: project.description,
       title: project.title,
-      projectID:82
+      projectID:83
     })
       .then((res) => {
         console.log(res);
         console.log(project);
-        window.location.reload(); // ????
+        // window.location.reload(); // ????
       })
       .catch(()=> {
         console.log(project);

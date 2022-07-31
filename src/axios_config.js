@@ -10,7 +10,7 @@ axios.interceptors.request.use(
   (request) => {
     toastId = toast.loading('Loading...');
     request.headers = {
-      'Authorization' : `Bearer ${localStorage.getItem('clientToken')}`,
+      'Authorization': `Bearer ${localStorage.getItem('clientToken')}`,
       'Content-Type': 'application/json',
     };
     return request;
@@ -22,10 +22,13 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (response) => {
     toast.dismiss(toastId);
-    if(response.status == 200) {
+    if (response.config.url == '/auth/login') {
       toast.success('Successful Login', toastProperty);
     }
-    if(response.status == 201) {
+    if (response.config.url == '/projects') {
+      toast.success(response.statusText, toastProperty);
+    }
+    if (response.config.url == '/subjects') {
       toast.success(response.statusText, toastProperty);
     }
     return response;
@@ -35,8 +38,8 @@ axios.interceptors.response.use(
       localStorage.setItem('clientToken', null);
       toast.error(error.response.data.message, toastProperty);
     }
-    if(error.response.status == 409) {
-      toast.error(error.response.data.message,toastProperty);
+    if (error.response.status == 409) {
+      toast.error(error.response.data.message, toastProperty);
     }
     return Promise.reject(error);
   }

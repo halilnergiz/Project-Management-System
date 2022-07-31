@@ -39,7 +39,7 @@ const SidebarItem = styled.div`
   }
 
   .sidebar-item.open > .sidebar-title .toggle-btn {
-    transform: rotate(180deg);
+    transform: rotateX(180deg);
   }
 
   .sidebar-content {
