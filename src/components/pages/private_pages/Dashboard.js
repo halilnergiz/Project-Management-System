@@ -18,7 +18,7 @@ const LayoutWrapper = styled.div`
 const MainLayout = styled.div`
   height: 100%;
   width: 100%;
-  overflow-y: none;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,9 +30,9 @@ const Dashboard = observer(({ store }) => {
     store.token !== 'null'
       ?
       <LayoutWrapper>
-        <Sidebar />
+        <Sidebar store={store} />
         <MainLayout>
-
+          {console.log(store.token)}
           <Header store={store} />
 
           <Outlet />

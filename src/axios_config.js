@@ -31,6 +31,9 @@ axios.interceptors.response.use(
     if (response.config.url == '/subjects') {
       toast.success(response.statusText, toastProperty);
     }
+    if (response.config.url == '/issue/kanban') {
+      toast.success(response.statusText, toastProperty);
+    }
     return response;
   }, (error) => {
     toast.dismiss(toastId);

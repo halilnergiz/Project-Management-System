@@ -7,13 +7,13 @@ import axios from 'axios';
 import { observer } from 'mobx-react';
 import Swal from 'sweetalert2';
 
-import loginLogo from '../../assets/login-logo.png';
 import Input from '../templates/form-input/Input';
 import { Form } from '../UI/atoms/Form.js';
-import {Title } from '../UI/atoms/Texts.js';
+import { Title } from '../UI/atoms/Texts.js';
 import { Submit, NavButton } from '../UI/atoms/Buttons.js';
 import { useNavigate } from 'react-router';
 import { mainColors } from '../UI/staticStyle/staticStyle';
+import Logo from '../templates/logo/Login-Logo';
 
 /* Register Form Style */
 const RegisterContent = styled.div`
@@ -48,7 +48,7 @@ const RegisterLogoSide = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 `;
 
@@ -56,17 +56,13 @@ const İcon = styled.i`
     margin-bottom: 1rem;
 `;
 
-const Logo = styled.img`
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
+const TextArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -5rem;
 `;
-
-Logo.defaultProps = {
-  src: loginLogo
-};
 
 // yup Register Schema 
 const schema = yup.object({
@@ -93,7 +89,7 @@ const Register = observer(() => {
       name: data.name,
       password: data.password
     })
-      .then((res) => {        
+      .then((res) => {
         console.log(res);
         setTimeout(() => {
           navigate('/');
@@ -112,10 +108,12 @@ const Register = observer(() => {
 
       <RegisterLogoSide>
         <Logo />
-        <İcon className="fa-xl fa-solid fa-diagram-project"></İcon>
-        <h2>Bize Katıl</h2>
-        <h2>Geleceğe Adım At</h2>
-        <h3>Projelerini adım adım takip et, kısa sürede çok iş başar!</h3>
+        <TextArea>
+          <İcon className="fa-xl fa-solid fa-diagram-project"></İcon>
+          <h2>Bize Katıl</h2>
+          <h2>Geleceğe Adım At</h2>
+          <h3>Projelerini adım adım takip et, kısa sürede çok iş başar!</h3>
+        </TextArea>
       </RegisterLogoSide>
 
       <RegisterFormContent>

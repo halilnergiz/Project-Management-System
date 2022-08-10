@@ -1,6 +1,6 @@
 import React from 'react';
 import store from './Store';
-import { Register, Login, Home, Dashboard, NoMatch, Unauthorized } from './components/pages';
+import { Register, Login, Home, Dashboard, NoMatch, Unauthorized, KanbanBoard } from './components/pages';
 import CreateProject from './components/pages/private_pages/dash_routes/CreateProject';
 import CreateSubject from './components/pages/private_pages/dash_routes/CreateSubject';
 
@@ -29,6 +29,10 @@ const routes = [
       {
         path: 'create_new_subject',
         element: <CreateSubject />
+      },
+      {
+        path: 'kanban_board',
+        element: <KanbanBoard />
       }
     ],
   },

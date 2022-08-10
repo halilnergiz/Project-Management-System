@@ -1,11 +1,17 @@
+import {mainColors} from './staticStyle/staticStyle';
+
 export const darkTheme = {
-  bgColor: '#161616',
+  bgColor: mainColors.black,
   textColor: 'white',
-  iconColor: 'white'
+  changeThemeBtnColor: 'white',
+  iconTextColor: 'white',
+  iconBarColor: 'white'
 };
 
 export const lightTheme = {
   bgColor: 'white',
-  textColor: 'black',
-  iconColor: 'black'
+  changeThemeBtnColor: mainColors.black,
+  textColor: mainColors.black,
+  iconTextColor: mainColors.black,
+  iconBarColor: mainColors.black
 };

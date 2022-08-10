@@ -5,3 +5,4 @@ export { default as CreateProject } from './private_pages/dash_routes/CreateProj
 export { default as Login } from './Login';
 export { default as Register } from './Register';
 export { default as Unauthorized } from './Unauthorized';
+export { default as KanbanBoard } from './private_pages/dash_routes/KanbanBoard';

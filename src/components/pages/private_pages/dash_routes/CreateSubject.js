@@ -47,7 +47,7 @@ const CreateSubject = () => {
       .then((res) => {
         console.log(res);
         console.log(project);
-        window.location.reload(); // ????
+        window.location.reload(); 
       })
       .catch(()=> {
         console.log(project);

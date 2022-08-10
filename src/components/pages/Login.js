@@ -7,13 +7,13 @@ import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import 'babel-polyfill';
 
-import loginLogo from '../../assets/login-logo.png';
 import axios from 'axios';
 import { Form } from '../UI/atoms/Form.js';
 import { Title } from '../UI/atoms/Texts';
 import { Submit, NavButton } from '../UI/atoms/Buttons.js';
 import Input from '../templates/form-input/Input';
 import { mainColors } from '../UI/staticStyle/staticStyle';
+import Logo from '../templates/logo/Login-Logo';
 
 /* Login Form Style */
 const LoginContent = styled.div`
@@ -51,17 +51,6 @@ const LogoSide = styled.div`
     user-select: none;  
 `;
 
-const Logo = styled.img`
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-`;
-
-Logo.defaultProps = {
-  src: loginLogo
-};
 
 /* yup Register schema */
 const schema = yup.object({

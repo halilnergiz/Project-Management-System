@@ -7,22 +7,18 @@ import {observer} from 'mobx-react';
 import { NavButton } from '../../UI/atoms/Buttons';
 
 const ContentHeader = styled.div`
-    float: right;
     width: 100%;
-    display: flex; 
-    justify-content: space-between;
-    align-items: center;
     border-bottom: 1px solid #161616;
     background-color: ${(props) => props.theme.bgColor};
     padding: .2rem;
 `;
 
-const NavBar = styled.ul`
-  padding: 0 20px;
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-`;
+// const NavBar = styled.ul`
+//   padding: 0 20px;
+//   list-style: none;
+//   display: flex;
+//   flex-direction: row;
+// `;
 
 const Logout = styled(Link)`
     color: ${(props) => props.theme.textColor};
@@ -49,13 +45,13 @@ transform: rotate(10deg);
 
 const ChangeIcon = styled(DarkModeIcon)`
   font-size: 50px;
-  color: ${(props) => props.theme.iconColor};
+  color: ${(props) => props.theme.changeThemeBtnColor};
 `;
 
 const HeaderTools = styled.div`
   display: flex;
   flex-direction: row;
-  margin-right: 2%;
+  float: right ;
 `;
 
 const Header = observer(({ store })  => {
@@ -63,13 +59,13 @@ const Header = observer(({ store })  => {
   return (
     <ContentHeader>
 
-      <NavBar />
+      {/* <NavBar /> */}
 
       <HeaderTools>
 
         <NavButton to={'create_new_project'} header_button="true"> Create Project </NavButton >
-
         <NavButton to={'create_new_subject'} header_button="true"> Create Subject </NavButton >
+        <NavButton to={'kanban_board'} header_button="true"> Kanban Board </NavButton >
 
         <ChangeTheme type={'checkbox'} onClick={() => {
           JSON.stringify(store.theme) == JSON.stringify(darkTheme) ? store.theme = lightTheme : store.theme = darkTheme;

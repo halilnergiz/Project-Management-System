@@ -17,7 +17,6 @@ class Store {
   
   // client token
   token = localStorage.getItem('clientToken');
-  id;
   
   // user projects
   projects;
